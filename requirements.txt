@@ -8,4 +8,5 @@ peft
 bitsandbytes
 accelerate
 unsloth @ git+https://github.com/unslothai/unsloth.git
+unsloth_zoo
 xformers
