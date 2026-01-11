@@ -1,11 +1,15 @@
 #!/bin/bash
 # Launcher script for NurseSim-Triage agent
-# Supports dual-mode deployment: Gradio (human UI) or A2A (platform integration)
-
 set -e
 
-# Fix for libgomp Runtime Error on Hugging Face Spaces (CPU Upgrade/Basic)
-export OMP_NUM_THREADS=1
+# Fix for libgomp Runtime Error on Hugging Face Spaces (CPU Upgrade only)
+# If NO GPU (CUDA devices empty), restrict threads to avoid crash
+if [ -z "$CUDA_VISIBLE_DEVICES" ]; then
+    echo "Running on CPU - Setting OMP_NUM_THREADS=1"
+    export OMP_NUM_THREADS=1
+else
+    echo "Running on GPU (detected) - Allowing automatic threading"
+fi
 
 
 AGENT_MODE=${AGENT_MODE:-a2a}

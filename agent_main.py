@@ -10,12 +10,14 @@ import os
 import json
 import torch
 import uvicorn
+import asyncio
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import JSONResponse, FileResponse
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from pydantic import BaseModel
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from peft import PeftModel
 
 # ==========================================
@@ -42,57 +44,73 @@ class NurseSimTriageAgent:
     """
     
     def __init__(self):
-        """Initialize the triage agent and load the model."""
+        """Initialize the triage agent placeholder."""
         self.model = None
         self.tokenizer = None
         self.HF_TOKEN = os.environ.get("HF_TOKEN")
         
         if not self.HF_TOKEN:
             print("WARNING: HF_TOKEN not set. Model loading will fail if authentication is required.")
-        
-        self._load_model()
     
-    def _load_model(self):
-        """Load the base model and LoRA adapters."""
+    async def load_model(self):
+        """Load the base model and LoRA adapters asynchronously."""
         if self.model is not None:
-            return  # Already loaded
-        
+            return
+
         try:
+            print("⏳ Starting model load...")
             base_model_id = "meta-llama/Llama-3.2-3B-Instruct"
             adapter_id = "NurseCitizenDeveloper/NurseSim-Triage-Llama-3.2-3B"
             
-            print(f"Loading tokenizer from {adapter_id}...")
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                adapter_id,
-                token=self.HF_TOKEN
-            )
+            # Offload heavy loading to thread to avoid blocking event loop
+            await asyncio.to_thread(self._load_weights, base_model_id, adapter_id)
             
-            print(f"Loading base model {base_model_id}...")
-            # Use device_map="auto" to handle CPU/GPU automatically
-            self.model = AutoModelForCausalLM.from_pretrained(
-                base_model_id,
-                torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-                device_map="auto",
-                low_cpu_mem_usage=True,
-                token=self.HF_TOKEN,
-            )
-            
-            print(f"Applying LoRA adapters from {adapter_id}...")
-            self.model = PeftModel.from_pretrained(
-                self.model,
-                adapter_id,
-                token=self.HF_TOKEN
-            )
-            self.model.eval()
-            print(f"Model loaded successfully on {self.model.device}!")
+            print("✅ Model loaded successfully!")
         except Exception as e:
-            print(f"CRITICAL ERROR loading model: {e}")
-            # We don't raise here to allow the server to start (and report unhealthy status)
-    
+            print(f"❌ CRITICAL ERROR loading model: {e}")
+            import traceback
+            traceback.print_exc()
+
+    def _load_weights(self, base_model_id, adapter_id):
+        print(f"Loading tokenizer from {adapter_id}...")
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            adapter_id,
+            token=self.HF_TOKEN
+        )
+        
+        print(f"Loading base model {base_model_id} with 4-bit quantization...")
+        
+        # Modern 4-bit loading configuration
+        bnb_config = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.float16,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+        )
+
+        self.model = AutoModelForCausalLM.from_pretrained(
+            base_model_id,
+            quantization_config=bnb_config,
+            device_map="auto",
+            low_cpu_mem_usage=True,
+            token=self.HF_TOKEN,
+        )
+        
+        print(f"Applying LoRA adapters from {adapter_id}...")
+        self.model = PeftModel.from_pretrained(
+            self.model,
+            adapter_id,
+            token=self.HF_TOKEN
+        )
+        self.model.eval()
+
     def process_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
         """Process an A2A task and return the triage assessment."""
         if self.model is None:
-            return {"error": "Model not loaded", "triage_category": "Error"}
+            return {
+                "error": "ModelStillLoading", 
+                "message": "The agent is still warming up. Please retry in 30 seconds."
+            }
 
         try:
             # Extract task data
@@ -163,23 +181,30 @@ Vitals: HR {hr}, BP {bp}, SpO2 {spo2}%, Temp {temp}C.
     def health_check(self) -> Dict[str, Any]:
         """Return agent health status."""
         return {
-            "status": "healthy" if self.model is not None else "unhealthy",
+            "status": "healthy" if self.model is not None else "loading",
             "model_loaded": self.model is not None,
-            "gpu_available": torch.cuda.is_available(),
-            "device": str(self.model.device) if self.model else "not loaded"
+            "gpu_available": torch.cuda.is_available()
         }
 
 # ==========================================
-# FastAPI Server Setup
+# FastAPI Lifecycle & App
 # ==========================================
 
-print("Initializing NurseSim-Triage Agent...")
 agent = NurseSimTriageAgent()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Load model in background
+    print("🚀 Server starting. Triggering model load task...")
+    asyncio.create_task(agent.load_model())
+    yield
+    # Shutdown logic (if any)
+    print("🛑 Server shutting down.")
 
 app = FastAPI(
     title="NurseSim-Triage Agent",
-    description="A2A Interface for Clinical Triage",
-    version="1.0.0"
+    version="1.1.0",
+    lifespan=lifespan
 )
 
 app.add_middleware(
@@ -192,7 +217,10 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "NurseSim-Triage Agent is running. Visit /health for status."}
+    return {
+        "message": "NurseSim-Triage Agent Online",
+        "status": agent.health_check()["status"]
+    }
 
 @app.get("/health")
 async def health_check():
@@ -208,11 +236,9 @@ async def get_agent_card():
 
 @app.post("/process-task")
 async def process_task(task: TaskInput):
-    """
-    Standard A2A task processing endpoint.
-    Accepts JSON body matching TaskInput schema.
-    """
     result = agent.process_task(task.dict())
+    if "error" in result and result.get("message") == "ModelStillLoading":
+        raise HTTPException(status_code=503, detail=result["message"])
     return result
 
 # ==========================================
@@ -221,5 +247,4 @@ async def process_task(task: TaskInput):
 
 if __name__ == "__main__":
     print("Starting A2A Server on port 8080...")
-    # Listen on all interfaces (0.0.0.0) for Docker support
     uvicorn.run(app, host="0.0.0.0", port=8080)
