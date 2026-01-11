@@ -1,0 +1,42 @@
+name: Sync to Hugging Face Space
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'app.py'
+      - 'requirements.txt'
+      - 'MODEL_CARD.md'
+
+jobs:
+  sync-to-hub:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        lfs: true
+    
+    - name: Push to Hugging Face Space
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        
+        # Clone the HF Space repo
+        git clone https://huggingface.co/spaces/NurseCitizenDeveloper/NurseSim-Triage-Demo hf-space
+        
+        # Copy updated files
+        cp app.py hf-space/app.py
+        cp requirements.txt hf-space/requirements.txt
+        cp MODEL_CARD.md hf-space/README.md
+        
+        # Push to HF Space
+        cd hf-space
+        git add .
+        git commit -m "🚀 Auto-sync from GitHub: ${GITHUB_SHA::7}" || echo "No changes to commit"
+        git push https://NurseCitizenDeveloper:$HF_TOKEN@huggingface.co/spaces/NurseCitizenDeveloper/NurseSim-Triage-Demo main
+        
+        echo "✅ Successfully synced to Hugging Face Space!"
