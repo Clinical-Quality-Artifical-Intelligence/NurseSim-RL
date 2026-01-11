@@ -65,8 +65,87 @@ obs, reward, terminated, truncated, info = env.step(action)
 
 ### Running the Demo
 
+**Gradio Mode (Human UI):**
 ```bash
+export AGENT_MODE=gradio
+export HF_TOKEN=your_hf_token_here
 python app.py
+```
+
+**AgentBeats A2A Mode (Platform Integration):**
+```bash
+export AGENT_MODE=a2a
+export HF_TOKEN=your_hf_token_here
+python agent_main.py
+```
+
+## 🤖 AgentBeats Integration
+
+This agent is fully compatible with the [AgentBeats platform](https://agentbeats.org) for automated agent evaluation via the **Agent-to-Agent (A2A) protocol**.
+
+### Dual-Mode Architecture
+
+The agent supports two deployment modes:
+
+| Mode | Purpose | Entry Point | Port |
+|------|---------|-------------|------|
+| **Gradio** | Human-facing UI for demos | `app.py` | 7860 |
+| **A2A** | Platform integration for automated evaluation | `agent_main.py` | 8080 |
+
+Set the mode via the `AGENT_MODE` environment variable.
+
+### A2A Protocol Compliance
+
+- **Agent Card:** `.well-known/agent-card.json` - Metadata and schemas
+- **Task Processing:** Structured input/output for triage assessments
+- **Lifecycle Methods:** `reset()`, `health_check()`
+- **Protocol Version:** A2A v1.0
+
+### Local Testing with AgentBeats Controller
+
+```bash
+# Install earthshaker SDK
+pip install earthshaker
+
+# Set environment variables
+export HF_TOKEN=your_hf_token_here
+export AGENT_MODE=a2a
+
+# Run the controller
+earthshaker run_ctrl
+
+# Test the agent card endpoint (in another terminal)
+curl http://localhost:8080/.well-known/agent-card.json | jq
+
+# Submit a test task via A2A protocol
+curl -X POST http://localhost:8080/task \
+  -H "Content-Type: application/json" \
+  -d '{
+    "complaint": "Chest pain and shortness of breath",
+    "vitals": {
+      "heart_rate": 120,
+      "blood_pressure": "85/55",
+      "spo2": 89,
+      "temperature": 37.8
+    }
+  }'
+```
+
+### Docker Deployment
+
+**Build:**
+```bash
+docker build -t nursesim-triage:latest .
+```
+
+**Run in A2A Mode:**
+```bash
+docker run -e HF_TOKEN=$HF_TOKEN -e AGENT_MODE=a2a -p 8080:8080 nursesim-triage:latest
+```
+
+**Run in Gradio Mode:**
+```bash
+docker run -e HF_TOKEN=$HF_TOKEN -e AGENT_MODE=gradio -p 7860:7860 nursesim-triage:latest
 ```
 
 ## 📊 Training Results

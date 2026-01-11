@@ -1,9 +1,11 @@
 # NurseSim-Triage Gradio Demo - Hugging Face Spaces Requirements
 # Compatible with ZeroGPU (No Unsloth - uses standard Transformers+PEFT)
 
-gradio>=4.0.0
+gradio
+spaces
 torch
 transformers
 peft
 bitsandbytes
 accelerate
+agentbeats

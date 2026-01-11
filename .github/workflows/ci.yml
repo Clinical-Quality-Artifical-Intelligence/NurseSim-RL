@@ -55,3 +55,24 @@ jobs:
       run: |
         python generate_dataset.py --num_scenarios 10 --output_file data/test_dataset.json
         echo "✅ Dataset generation successful"
+    
+    - name: Test A2A Protocol Compliance
+      run: |
+        python tests/test_a2a_compliance.py
+    
+    - name: Test Dual-Mode Configuration
+      run: |
+        chmod +x tests/test_dual_mode.sh
+        chmod +x run.sh
+        bash tests/test_dual_mode.sh
+    
+    - name: Validate Agent Card Schema
+      run: |
+        python -c "
+        import json
+        from pathlib import Path
+        card = json.loads(Path('.well-known/agent-card.json').read_text())
+        assert card['protocol'] == 'a2a/v1.0', 'Invalid protocol version'
+        assert 'capabilities' in card, 'Missing capabilities'
+        print('✅ Agent card schema valid')
+        "
