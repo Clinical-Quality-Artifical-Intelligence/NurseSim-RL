@@ -246,5 +246,5 @@ async def process_task(task: TaskInput):
 # ==========================================
 
 if __name__ == "__main__":
-    print("Starting A2A Server on port 8080...")
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    print("Starting A2A Server on port 7860...")
+    uvicorn.run(app, host="0.0.0.0", port=7860)
