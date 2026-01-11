@@ -1,0 +1,118 @@
+{
+    "name": "NurseSim-Triage",
+    "version": "1.0.0",
+    "description": "An AI agent fine-tuned for clinical triage using the Manchester Triage System (MTS). Provides emergency department triage assessments based on patient complaints and vital signs.",
+    "author": "NurseCitizenDeveloper (ClinyQAi)",
+    "protocol": "a2a/v1.0",
+    "capabilities": {
+        "tasks": [
+            "clinical_triage",
+            "patient_assessment",
+            "vital_signs_evaluation"
+        ],
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "complaint": {
+                    "type": "string",
+                    "description": "Patient's chief complaint or presenting symptoms"
+                },
+                "vitals": {
+                    "type": "object",
+                    "properties": {
+                        "heart_rate": {
+                            "type": "integer",
+                            "description": "Heart rate in beats per minute"
+                        },
+                        "blood_pressure": {
+                            "type": "string",
+                            "description": "Blood pressure in format '120/80'"
+                        },
+                        "spo2": {
+                            "type": "integer",
+                            "description": "Oxygen saturation percentage"
+                        },
+                        "temperature": {
+                            "type": "number",
+                            "description": "Body temperature in Celsius"
+                        }
+                    },
+                    "required": [
+                        "heart_rate",
+                        "blood_pressure",
+                        "spo2",
+                        "temperature"
+                    ]
+                }
+            },
+            "required": [
+                "complaint",
+                "vitals"
+            ]
+        },
+        "output_schema": {
+            "type": "object",
+            "properties": {
+                "triage_category": {
+                    "type": "string",
+                    "enum": [
+                        "Immediate",
+                        "Very Urgent",
+                        "Urgent",
+                        "Standard",
+                        "Non-Urgent"
+                    ],
+                    "description": "Manchester Triage System category"
+                },
+                "assessment": {
+                    "type": "string",
+                    "description": "Detailed clinical assessment and rationale"
+                },
+                "recommended_action": {
+                    "type": "string",
+                    "description": "Recommended next steps for patient care"
+                }
+            },
+            "required": [
+                "triage_category",
+                "assessment"
+            ]
+        }
+    },
+    "model": {
+        "type": "llm",
+        "base_model": "meta-llama/Llama-3.2-3B-Instruct",
+        "adapter": "NurseCitizenDeveloper/NurseSim-Triage-Llama-3.2-3B",
+        "training_method": "LoRA (Low-Rank Adaptation)",
+        "framework": "Hugging Face Transformers + PEFT"
+    },
+    "links": {
+        "repository": "https://github.com/ClinyQAi/NurseSim-RL",
+        "model_card": "https://huggingface.co/NurseCitizenDeveloper/NurseSim-Triage-Llama-3.2-3B",
+        "demo": "https://huggingface.co/spaces/NurseCitizenDeveloper/NurseSim-Triage-Demo",
+        "blog_post": "https://huggingface.co/blog/NurseCitizenDeveloper/nursesim-rl-training-ai-agents-clinical-triage",
+        "agentbeats_profile": "https://agentbeats.dev/ClinyQAi/nursesim-triage"
+    },
+    "requirements": {
+        "gpu": true,
+        "gpu_memory_gb": 8,
+        "python_version": ">=3.9",
+        "environment_variables": [
+            {
+                "name": "HF_TOKEN",
+                "required": true,
+                "description": "Hugging Face API token for accessing gated models"
+            }
+        ]
+    },
+    "license": "Llama 3.2 Community License",
+    "tags": [
+        "healthcare",
+        "triage",
+        "nursing",
+        "clinical-assessment",
+        "medical-education",
+        "llama-3.2",
+        "openenv-challenge"
+    ]
+}
