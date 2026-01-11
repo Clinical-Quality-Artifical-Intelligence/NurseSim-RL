@@ -45,7 +45,7 @@ jobs:
     
     - name: Test environment registration
       run: |
-        python -c "import gymnasium as gym; env = gym.make('NurseSim-Triage-v0'); print('✅ Environment registered successfully')"
+        python -c "import gymnasium as gym; import nursesim_rl; env = gym.make('NurseSim-Triage-v0'); print('✅ Environment registered successfully')"
     
     - name: Run environment test
       run: |
