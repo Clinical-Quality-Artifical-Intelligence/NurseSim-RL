@@ -9,6 +9,8 @@ pinned: false
 
 # NurseSim-RL: A Healthcare Agent Environment for Clinical Triage
 
+[![AgentBeats A2A](https://img.shields.io/badge/AgentBeats-A2A%20Enabled-purple)](https://agentbeats.dev/ClinyQAi/nursesim-triage)
+
 [![OpenEnv Challenge](https://img.shields.io/badge/OpenEnv-Challenge%202026-blue)](https://rdi.berkeley.edu/agentx-agentbeats)
 [![Hugging Face Model](https://img.shields.io/badge/🤗-Model-yellow)](https://huggingface.co/NurseCitizenDeveloper/NurseSim-Triage-Llama-3.2-3B)
 [![W&B Report](https://img.shields.io/badge/W%26B-Report-orange)](https://wandb.ai/mrlincs-nursing-citizen-development/huggingface)
