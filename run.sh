@@ -4,6 +4,10 @@
 
 set -e
 
+# Fix for libgomp Runtime Error on Hugging Face Spaces (CPU Upgrade/Basic)
+export OMP_NUM_THREADS=1
+
+
 AGENT_MODE=${AGENT_MODE:-a2a}
 
 echo "NurseSim-Triage Launcher"
