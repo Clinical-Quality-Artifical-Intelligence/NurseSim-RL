@@ -30,6 +30,47 @@ pinned: false
 - **Realistic Scenarios:** 15+ patient archetypes across all 5 MTS categories.
 - **Safety-Aware Rewards:** Heavy penalties for under-triaging critical patients.
 - **Fine-Tuned Agent:** Llama 3.2 3B trained with Unsloth (4-bit QLoRA).
+- **A2A Protocol:** Agent-to-Agent evaluation via AgentBeats platform.
+- **Docker Deployment:** Fully containerized for reproducibility.
+- **Dual Mode:** Runs as interactive demo (Gradio) or API server (A2A).
+
+## 🚀 Quick Start
+
+### Run with Docker
+
+```bash
+# Pull the image
+docker pull nursecitizendeveloper/nursesim-triage:latest
+
+# Run in demo mode (Gradio UI)
+docker run -p 7860:7860 nursecitizendeveloper/nursesim-triage:latest
+
+# Run in A2A mode (API only)
+docker run -e MODE=a2a -p 7860:7860 nursecitizendeveloper/nursesim-triage:latest
+```
+
+### Test the A2A Endpoint
+
+```bash
+# Health check
+curl https://nursecitizendeveloper-nursesim-triage-demo.hf.space/health
+
+# Get agent card
+curl https://nursecitizendeveloper-nursesim-triage-demo.hf.space/.well-known/agent-card.json
+
+# Submit a task
+curl -X POST https://nursecitizendeveloper-nursesim-triage-demo.hf.space/process-task \
+  -H "Content-Type: application/json" \
+  -d '{
+    "complaint": "Chest pain",
+    "vitals": {
+      "heart_rate": 110,
+      "blood_pressure": "90/60",
+      "spo2": 94,
+      "temperature": 37.2
+    }
+  }'
+```
 
 ## 🏗️ Project Structure
 
@@ -182,13 +223,75 @@ See our [W&B Report](https://wandb.ai/mrlincs-nursing-citizen-development/huggin
 | 4 | Standard | 120 min | Minor injuries, Mild illness |
 | 5 | Non-Urgent | 240 min | Minor cuts, GP-suitable |
 
-## 🔗 Links
+## 📚 Resources
 
-- **Hugging Face Model:** [NurseCitizenDeveloper/NurseSim-Triage-Llama-3.2-3B](https://huggingface.co/NurseCitizenDeveloper/NurseSim-Triage-Llama-3.2-3B)
-- **Gradio Demo:** [HF Spaces](https://huggingface.co/spaces/NurseCitizenDeveloper/NurseSim-Triage-Demo)
-- **Training Notebook:** [Colab](notebooks/NurseSim_RL_Unsloth_Training.ipynb)
+- **Hugging Face Space:** [Try the Demo](https://huggingface.co/spaces/NurseCitizenDeveloper/NurseSim-Triage-Demo)
+- **Model Card:** [NurseSim-Triage-Llama-3.2-3B](https://huggingface.co/NurseCitizenDeveloper/NurseSim-Triage-Llama-3.2-3B)
+- **Training Report:** [W&B Dashboard](https://wandb.ai/mrlincs-nursing-citizen-development/huggingface)
+- **Blog Post:** [Training AI Agents for Clinical Triage](https://huggingface.co/blog/NurseCitizenDeveloper/nursesim-rl-training-ai-agents-clinical-triage)
+- **AgentBeats Profile:** [NurseSim-Triage Benchmark](https://agentbeats.dev/ClinyQAi/nursesim-triage)
+- **Leaderboard:** [Community Results](https://github.com/ClinyQAi/NurseSim-Triage-Leaderboard)
+- **Docker Hub:** [nursecitizendeveloper/nursesim-triage](https://hub.docker.com/r/nursecitizendeveloper/nursesim-triage)
 
-## 📜 License
+## 🤖 AgentBeats Integration
+
+NurseSim-Triage implements the **Agent-to-Agent (A2A) protocol** for automated benchmarking:
+
+### Protocol Details
+- **Version:** a2a/v1.0
+- **Agent Card:** `/.well-known/agent-card.json`
+- **Health Endpoint:** `/health`
+- **Task Endpoint:** `/process-task` (POST)
+
+### Evaluation Metrics
+- **Triage Accuracy** (0-1): Percentage of correct MTS assignments
+- **Safety Score** (0-1): Penalizes dangerous under-triage
+- **Response Quality** (0-1): Clinical reasoning coherence
+- **Response Time** (ms): Computational efficiency
+
+### Submit Your Agent
+1. Register on [AgentBeats](https://agentbeats.dev)
+2. Implement the A2A protocol
+3. Submit to NurseSim-Triage benchmark
+4. View results on the [leaderboard](https://agentbeats.dev/ClinyQAi/nursesim-triage)
+
+## 🐳 Deployment
+
+### Hugging Face Spaces
+Deployed on **NVIDIA T4 (Medium)** GPU with:
+- 4-bit quantization (`BitsAndBytesConfig`)
+- Asynchronous model loading
+- Dual-mode support (Gradio + A2A)
+
+### Docker
+```bash
+# Build locally
+docker build -t nursesim-triage .
+
+# Run in demo mode
+docker run -p 7860:7860 nursesim-triage
+
+# Run in A2A mode
+docker run -e MODE=a2a -p 7860:7860 nursesim-triage
+```
+
+### Environment Variables
+- `MODE`: `gradio` (default) or `a2a`
+- `HF_TOKEN`: Hugging Face API token (for private models)
+- `OMP_NUM_THREADS`: OpenMP threads (auto-configured)
+
+## 🏆 OpenEnv Challenge
+
+This project was submitted to the **OpenEnv Challenge 2026** (Berkeley RDI AgentX-AgentBeats Competition).
+
+**Key Contributions:**
+- Novel benchmark for clinical AI evaluation
+- Safety-focused metrics (penalizes under-triage)
+- Open-source training pipeline
+- Reproducible Docker deployment
+- Community leaderboard
+
+## 📄 License
 
 MIT License - See [LICENSE](LICENSE) for details.
 
