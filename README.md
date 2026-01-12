@@ -297,9 +297,25 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgements
 
-- **OpenEnv Challenge** - Berkeley RDI, PyTorch, Hugging Face, Unsloth
-- **Manchester Triage System** - Clinical framework
-- **Unsloth AI** - 2x faster fine-tuning
+**Clinical Leadership & Innovation:**
+- **Dr Clare Cable**, Chief Executive, Burdett Trust for Nursing — For championing Relational Intelligence
+- **Professor Joanne Bosanquet**, Chief Executive, Foundation of Nursing Studies — For championing person-centred nursing
+- **Professor Gemma Stacey**, Programme Director, Nursing Now Challenge — For inspiring global nursing leadership
+- **Aisha Holloway**, Chief Nursing Officer, Scotland — For inspiring excellence
+
+**Research & Education Partners:**
+- **Kumbi Kariwo** — Champion of AI equity and bias mitigation
+- **Rohit Sagoo** — Children's Nurse & Innovator in education and practice
+- **Dr Hellena Habte-Asres** — Big Data Researcher, Nurse & Innovator
+- **Kelly Thobekile Ncube** — Senior Lecturer in Adult Nursing (SFHEA) and Global Health Lecturer Volunteer Fellow
+- **Josie Rudman MBE** — Mutual Mentor & champion of nurse-led innovation
+
+**Technical Community:**
+- **OpenEnv Challenge** — Berkeley RDI, PyTorch, Hugging Face, Unsloth
+- **Manchester Triage System** — Clinical framework
+- **Unsloth AI** — 2x faster fine-tuning
+- **AgentBeats** — A2A protocol infrastructure
+- **NVIDIA** — T4 GPU infrastructure
 
 ---
 
