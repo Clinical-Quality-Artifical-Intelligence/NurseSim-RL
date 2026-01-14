@@ -90,8 +90,9 @@ def generate_dataset(n_samples: int = 500, seed: int = 42) -> List[Dict]:
     random.seed(seed)
     dataset = []
     
-    # Distribution matching real A&E (more Cat 3-4)
-    category_weights = {1: 0.05, 2: 0.15, 3: 0.35, 4: 0.35, 5: 0.10}
+    # Distribution adjusted for balanced IMMEDIATE case training
+    # Original: {1: 0.05, 2: 0.15, 3: 0.35, 4: 0.35, 5: 0.10}
+    category_weights = {1: 0.20, 2: 0.20, 3: 0.25, 4: 0.25, 5: 0.10}
     
     for i in range(n_samples):
         # Weighted category selection

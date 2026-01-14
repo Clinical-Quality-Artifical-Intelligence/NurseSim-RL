@@ -1,0 +1,2892 @@
+{
+  "1": [
+    {
+      "chief_complaint": "I can't breathe and my throat feels tight. I think it was the nuts I ate.",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 80,
+        "bp_dia": 50,
+        "spo2": 85,
+        "rr": 30,
+        "temp": 37.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 22,
+        "gender": "male",
+        "relevant_PMH": "peanut allergy",
+        "time_course": "10 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He's not responding. He just fell over.",
+      "vitals": {
+        "hr": 122,
+        "bp_sys": 70,
+        "bp_dia": 40,
+        "spo2": 92,
+        "rr": 28,
+        "temp": 36.8,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 58,
+        "gender": "male",
+        "relevant_PMH": "hypertension, smoker",
+        "time_course": "5 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "My baby's skin is turning purple. She's burning up and not waking up!",
+      "vitals": {
+        "hr": 180,
+        "bp_sys": 60,
+        "bp_dia": 30,
+        "spo2": 88,
+        "rr": 40,
+        "temp": 40.3,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 1,
+        "gender": "female",
+        "relevant_PMH": "None",
+        "time_course": "1 hour ago"
+      }
+    },
+    {
+      "chief_complaint": "I have chest pain like something is crushing me.",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 100,
+        "bp_dia": 60,
+        "spo2": 85,
+        "rr": 25,
+        "temp": 37.6,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 68,
+        "gender": "female",
+        "relevant_PMH": "previous heart attack",
+        "time_course": "20 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "I can't stop coughing and I'm struggling to breathe.",
+      "vitals": {
+        "hr": 138,
+        "bp_sys": 90,
+        "bp_dia": 55,
+        "spo2": 82,
+        "rr": 32,
+        "temp": 38.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 45,
+        "gender": "non-binary",
+        "relevant_PMH": "asthma",
+        "time_course": "15 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He was lifting something heavy and suddenly started gasping for air.",
+      "vitals": {
+        "hr": 150,
+        "bp_sys": 60,
+        "bp_dia": 35,
+        "spo2": 78,
+        "rr": 40,
+        "temp": 36.7,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 37,
+        "gender": "male",
+        "relevant_PMH": "no known conditions",
+        "time_course": "10 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "My pregnant wife's arms and legs are shaking uncontrollably!",
+      "vitals": {
+        "hr": 98,
+        "bp_sys": 160,
+        "bp_dia": 110,
+        "spo2": 93,
+        "rr": 24,
+        "temp": 37.0,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 29,
+        "gender": "female",
+        "relevant_PMH": "34 weeks pregnant",
+        "time_course": "5 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He just collapsed and isn't breathing!",
+      "vitals": {
+        "hr": 0,
+        "bp_sys": 0,
+        "bp_dia": 0,
+        "spo2": 0,
+        "rr": 0,
+        "temp": 36.5,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 75,
+        "gender": "male",
+        "relevant_PMH": "history of heart failure",
+        "time_course": "3 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He keeps having these fits and won't stop!",
+      "vitals": {
+        "hr": 140,
+        "bp_sys": 100,
+        "bp_dia": 60,
+        "spo2": 95,
+        "rr": 20,
+        "temp": 37.2,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 17,
+        "gender": "male",
+        "relevant_PMH": "epilepsy",
+        "time_course": "25 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "She's been vomiting blood and now she's passed out!",
+      "vitals": {
+        "hr": 145,
+        "bp_sys": 65,
+        "bp_dia": 40,
+        "spo2": 90,
+        "rr": 22,
+        "temp": 36.0,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 68,
+        "gender": "female",
+        "relevant_PMH": "peptic ulcer disease",
+        "time_course": "2 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "He's not breathing! He just collapsed, and he's turning blue!",
+      "vitals": {
+        "hr": 30,
+        "bp_sys": 50,
+        "bp_dia": 30,
+        "spo2": 70,
+        "rr": 0,
+        "temp": 35.0,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 72,
+        "gender": "male",
+        "relevant_PMH": "history of cardiac issues",
+        "time_course": "Collapsed suddenly 5 minutes ago."
+      }
+    },
+    {
+      "chief_complaint": "I can't breathe and my throat's closing up after eating peanuts!",
+      "vitals": {
+        "hr": 145,
+        "bp_sys": 80,
+        "bp_dia": 50,
+        "spo2": 82,
+        "rr": 30,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 25,
+        "gender": "female",
+        "relevant_PMH": "known nut allergy",
+        "time_course": "Ate peanuts 10 minutes ago."
+      }
+    },
+    {
+      "chief_complaint": "My wife's having a seizure and it's not stopping!",
+      "vitals": {
+        "hr": 120,
+        "bp_sys": 135,
+        "bp_dia": 85,
+        "spo2": 95,
+        "rr": 24,
+        "temp": 37.5,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 30,
+        "gender": "female",
+        "relevant_PMH": "epilepsy",
+        "time_course": "Seizure started 25 minutes ago and hasn't stopped."
+      }
+    },
+    {
+      "chief_complaint": "He's not waking up, he just slumped over while eating!",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 90,
+        "bp_dia": 60,
+        "spo2": 92,
+        "rr": 32,
+        "temp": 37.9,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 56,
+        "gender": "male",
+        "relevant_PMH": "type 2 diabetes",
+        "time_course": "Collapsed 15 minutes ago."
+      }
+    },
+    {
+      "chief_complaint": "She won't wake up and she's burning up!",
+      "vitals": {
+        "hr": 140,
+        "bp_sys": 90,
+        "bp_dia": 55,
+        "spo2": 89,
+        "rr": 28,
+        "temp": 39.8,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 5,
+        "gender": "female",
+        "relevant_PMH": "recent flu-like symptoms",
+        "time_course": "Unresponsive for 20 minutes."
+      }
+    },
+    {
+      "chief_complaint": "I'm choking and can't catch my breath!",
+      "vitals": {
+        "hr": 160,
+        "bp_sys": 85,
+        "bp_dia": 50,
+        "spo2": 80,
+        "rr": 35,
+        "temp": 38.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 45,
+        "gender": "male",
+        "relevant_PMH": "smoker",
+        "time_course": "Onset of symptoms 15 minutes ago."
+      }
+    },
+    {
+      "chief_complaint": "Mom's bleeding a lot, and she's really dizzy!",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 70,
+        "bp_dia": 40,
+        "spo2": 88,
+        "rr": 28,
+        "temp": 37.2,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 62,
+        "gender": "female",
+        "relevant_PMH": "peptic ulcer",
+        "time_course": "Started vomiting blood 30 minutes ago."
+      }
+    },
+    {
+      "chief_complaint": "I found him floating face down in the pool!",
+      "vitals": {
+        "hr": 56,
+        "bp_sys": 100,
+        "bp_dia": 70,
+        "spo2": 88,
+        "rr": 6,
+        "temp": 34.0,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 8,
+        "gender": "male",
+        "relevant_PMH": "previous drowning incident",
+        "time_course": "Discovered in pool 5 minutes ago."
+      }
+    },
+    {
+      "chief_complaint": "My husband can't move his right side or speak suddenly!",
+      "vitals": {
+        "hr": 105,
+        "bp_sys": 175,
+        "bp_dia": 95,
+        "spo2": 94,
+        "rr": 18,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 67,
+        "gender": "male",
+        "relevant_PMH": "hypertension",
+        "time_course": "Started 20 minutes ago."
+      }
+    },
+    {
+      "chief_complaint": "She's been having these fits for a while now and is not getting better!",
+      "vitals": {
+        "hr": 160,
+        "bp_sys": 110,
+        "bp_dia": 70,
+        "spo2": 90,
+        "rr": 30,
+        "temp": 38.4,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 19,
+        "gender": "female",
+        "relevant_PMH": "none known",
+        "time_course": "Seizures ongoing for 30 minutes."
+      }
+    },
+    {
+      "chief_complaint": "He's not breathing and turning blue!",
+      "vitals": {
+        "hr": 30,
+        "bp_sys": 60,
+        "bp_dia": 40,
+        "spo2": 50,
+        "rr": 4,
+        "temp": 36.5,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 72,
+        "gender": "male",
+        "relevant_PMH": "heart failure",
+        "time_course": "collapsed suddenly 5 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "Her skin is covered in a rash and she's struggling to breathe!",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 70,
+        "bp_dia": 40,
+        "spo2": 82,
+        "rr": 38,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 29,
+        "gender": "female",
+        "relevant_PMH": "peanut allergy",
+        "time_course": "ate a meal containing peanuts 15 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He was shaking uncontrollably and now he's not waking up!",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 80,
+        "bp_dia": 50,
+        "spo2": 90,
+        "rr": 22,
+        "temp": 37.0,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 8,
+        "gender": "male",
+        "relevant_PMH": "epilepsy",
+        "time_course": "had a seizure 10 minutes ago, still unresponsive"
+      }
+    },
+    {
+      "chief_complaint": "He got hit by a car and there's blood everywhere!",
+      "vitals": {
+        "hr": 140,
+        "bp_sys": 70,
+        "bp_dia": 40,
+        "spo2": 88,
+        "rr": 30,
+        "temp": 35.8,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 45,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "struck by vehicle 20 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "She's been vomiting blood and now she's not responding!",
+      "vitals": {
+        "hr": 120,
+        "bp_sys": 60,
+        "bp_dia": 40,
+        "spo2": 92,
+        "rr": 24,
+        "temp": 37.5,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 67,
+        "gender": "female",
+        "relevant_PMH": "alcoholic liver disease",
+        "time_course": "vomiting for 2 hours before collapse"
+      }
+    },
+    {
+      "chief_complaint": "I found him floating in the pool and he's not breathing!",
+      "vitals": {
+        "hr": 20,
+        "bp_sys": 50,
+        "bp_dia": 30,
+        "spo2": 60,
+        "rr": 0,
+        "temp": 35.0,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 16,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "unresponsive for unknown duration"
+      }
+    },
+    {
+      "chief_complaint": "He can't breathe properly and his chest is all tight!",
+      "vitals": {
+        "hr": 150,
+        "bp_sys": 80,
+        "bp_dia": 50,
+        "spo2": 85,
+        "rr": 40,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 35,
+        "gender": "male",
+        "relevant_PMH": "asthma",
+        "time_course": "started suddenly 15 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "She suddenly has a severe headache and can't move her right side!",
+      "vitals": {
+        "hr": 98,
+        "bp_sys": 185,
+        "bp_dia": 110,
+        "spo2": 95,
+        "rr": 22,
+        "temp": 36.9,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 55,
+        "gender": "female",
+        "relevant_PMH": "hypertension",
+        "time_course": "started 20 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "She's been fitting continuously for over five minutes!",
+      "vitals": {
+        "hr": 145,
+        "bp_sys": 90,
+        "bp_dia": 60,
+        "spo2": 89,
+        "rr": 28,
+        "temp": 37.3,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 32,
+        "gender": "female",
+        "relevant_PMH": "bipolar disorder, takes lithium",
+        "time_course": "started seizing 7 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He was just burning some rubbish and he inhaled a lot of smoke!",
+      "vitals": {
+        "hr": 136,
+        "bp_sys": 85,
+        "bp_dia": 55,
+        "spo2": 78,
+        "rr": 32,
+        "temp": 36.4,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 40,
+        "gender": "male",
+        "relevant_PMH": "smoker",
+        "time_course": "exposure happened 10 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "My son's not waking up and his skin has purple spots.",
+      "vitals": {
+        "hr": 150,
+        "bp_sys": 80,
+        "bp_dia": 50,
+        "spo2": 88,
+        "rr": 35,
+        "temp": 39.5,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 6,
+        "gender": "male",
+        "relevant_pmh": "none",
+        "time_course": "Fever for 2 days, not waking up in last hour"
+      }
+    },
+    {
+      "chief_complaint": "She was coughing, now she can't breathe after eating peanuts!",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 75,
+        "bp_dia": 45,
+        "spo2": 85,
+        "rr": 40,
+        "temp": 36.8,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 21,
+        "gender": "female",
+        "relevant_pmh": "peanut allergy",
+        "time_course": "Allergic reaction 10 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "My wife is having a seizure and she's pregnant!",
+      "vitals": {
+        "hr": 120,
+        "bp_sys": 180,
+        "bp_dia": 110,
+        "spo2": 92,
+        "rr": 22,
+        "temp": 37.2,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 30,
+        "gender": "female",
+        "relevant_pmh": "pregnancy 32 weeks",
+        "time_course": "Seizure started 5 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He just collapsed and isn't breathing!",
+      "vitals": {
+        "hr": 0,
+        "bp_sys": 0,
+        "bp_dia": 0,
+        "spo2": 0,
+        "rr": 0,
+        "temp": 36.0,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 55,
+        "gender": "male",
+        "relevant_pmh": "previous heart attack",
+        "time_course": "Collapsed 2 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He cut himself badly and is losing a lot of blood!",
+      "vitals": {
+        "hr": 125,
+        "bp_sys": 80,
+        "bp_dia": 50,
+        "spo2": 95,
+        "rr": 28,
+        "temp": 35.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 40,
+        "gender": "male",
+        "relevant_pmh": "none",
+        "time_course": "Accident 10 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He's been vomiting and now he's not waking up!",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 90,
+        "bp_dia": 60,
+        "spo2": 94,
+        "rr": 30,
+        "temp": 37.0,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 25,
+        "gender": "male",
+        "relevant_pmh": "Type 1 diabetes",
+        "time_course": "Vomiting began 8 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "He's choking and can't breathe after the car crash!",
+      "vitals": {
+        "hr": 150,
+        "bp_sys": 90,
+        "bp_dia": 60,
+        "spo2": 82,
+        "rr": 45,
+        "temp": 36.5,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 35,
+        "gender": "male",
+        "relevant_pmh": "none",
+        "time_course": "Accident 5 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "He's been shivering and now he won't wake up!",
+      "vitals": {
+        "hr": 145,
+        "bp_sys": 70,
+        "bp_dia": 40,
+        "spo2": 90,
+        "rr": 20,
+        "temp": 40.0,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 72,
+        "gender": "male",
+        "relevant_pmh": "chronic kidney disease",
+        "time_course": "Fever for a day, unresponsive now"
+      }
+    },
+    {
+      "chief_complaint": "He's struggling to breathe, and his lips are turning blue!",
+      "vitals": {
+        "hr": 140,
+        "bp_sys": 95,
+        "bp_dia": 55,
+        "spo2": 78,
+        "rr": 34,
+        "temp": 37.8,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 60,
+        "gender": "male",
+        "relevant_pmh": "COPD",
+        "time_course": "Breathing difficulty started 1 hour ago"
+      }
+    },
+    {
+      "chief_complaint": "She passed out after having a seizure in the water!",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 85,
+        "bp_dia": 50,
+        "spo2": 89,
+        "rr": 26,
+        "temp": 33.0,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 45,
+        "gender": "female",
+        "relevant_pmh": "epilepsy",
+        "time_course": "Seizure 10 minutes ago, fell into pool"
+      }
+    },
+    {
+      "chief_complaint": "He's not breathing and is turning blue!",
+      "vitals": {
+        "hr": 120,
+        "bp_sys": 85,
+        "bp_dia": 50,
+        "spo2": 85,
+        "rr": 8,
+        "temp": 36.5,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 60,
+        "gender": "male",
+        "relevant_PMH": "history of COPD and smoking",
+        "time_course": "Found unconscious at home with sudden respiratory distress."
+      }
+    },
+    {
+      "chief_complaint": "He's collapsed and he's not waking up!",
+      "vitals": {
+        "hr": 45,
+        "bp_sys": 60,
+        "bp_dia": 40,
+        "spo2": 70,
+        "rr": 4,
+        "temp": 35.0,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 28,
+        "gender": "male",
+        "relevant_PMH": "history of depression, possible overdose",
+        "time_course": "Found unresponsive by his partner after taking pills."
+      }
+    },
+    {
+      "chief_complaint": "She keeps having seizures and isn't waking up!",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 90,
+        "bp_dia": 50,
+        "spo2": 92,
+        "rr": 20,
+        "temp": 37.8,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 35,
+        "gender": "female",
+        "relevant_PMH": "epilepsy",
+        "time_course": "Has had 5 continuous seizures lasting over 30 minutes."
+      }
+    },
+    {
+      "chief_complaint": "He's bleeding everywhere and can't stand up!",
+      "vitals": {
+        "hr": 140,
+        "bp_sys": 70,
+        "bp_dia": 40,
+        "spo2": 94,
+        "rr": 22,
+        "temp": 36.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 50,
+        "gender": "male",
+        "relevant_PMH": "alcohol use disorder",
+        "time_course": "Sudden onset of massive vomiting of blood at home."
+      }
+    },
+    {
+      "chief_complaint": "He's not breathing. He was underwater for a long time!",
+      "vitals": {
+        "hr": 50,
+        "bp_sys": 90,
+        "bp_dia": 60,
+        "spo2": 80,
+        "rr": 0,
+        "temp": 34.5,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 14,
+        "gender": "male",
+        "relevant_PMH": "asthma",
+        "time_course": "Pulled from a swimming pool after several minutes underwater."
+      }
+    },
+    {
+      "chief_complaint": "Her whole body is swollen, and she can't breathe!",
+      "vitals": {
+        "hr": 150,
+        "bp_sys": 80,
+        "bp_dia": 50,
+        "spo2": 85,
+        "rr": 30,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 22,
+        "gender": "female",
+        "relevant_PMH": "known peanut allergy",
+        "time_course": "Ate dessert containing peanuts, severe reaction in minutes."
+      }
+    },
+    {
+      "chief_complaint": "He's unconscious and his skin looks blotchy!",
+      "vitals": {
+        "hr": 145,
+        "bp_sys": 75,
+        "bp_dia": 40,
+        "spo2": 88,
+        "rr": 28,
+        "temp": 40.0,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 3,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "Suddenly developed a fever, rash, and became unresponsive."
+      }
+    },
+    {
+      "chief_complaint": "She's unconscious and breathing fast!",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 90,
+        "bp_dia": 60,
+        "spo2": 92,
+        "rr": 34,
+        "temp": 37.2,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 24,
+        "gender": "female",
+        "relevant_PMH": "type 1 diabetes",
+        "time_course": "Found with high blood sugar levels after missing insulin doses."
+      }
+    },
+    {
+      "chief_complaint": "She's fainted and keeps shaking!",
+      "vitals": {
+        "hr": 140,
+        "bp_sys": 170,
+        "bp_dia": 110,
+        "spo2": 95,
+        "rr": 25,
+        "temp": 37.5,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 30,
+        "gender": "female",
+        "relevant_PMH": "32 weeks pregnant, history of high blood pressure",
+        "time_course": "Sudden onset of seizures with high blood pressure."
+      }
+    },
+    {
+      "chief_complaint": "He's not moving, hit really hard!",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 85,
+        "bp_dia": 55,
+        "spo2": 90,
+        "rr": 28,
+        "temp": 36.5,
+        "avpu": "U"
+      },
+      "history": {
+        "age": 45,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "Involved in a high-speed car accident, unresponsive at the scene."
+      }
+    }
+  ],
+  "2": [
+    {
+      "chief_complaint": "My chest really hurts, like something's squeezing it.",
+      "vitals": {
+        "hr": 122,
+        "bp_sys": 90,
+        "bp_dia": 60,
+        "spo2": 94,
+        "rr": 20,
+        "temp": 37.1,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 64,
+        "gender": "male",
+        "relevant_PMH": "hypertension, smoker",
+        "time_course": "30 minutes"
+      }
+    },
+    {
+      "chief_complaint": "I suddenly have the worst headache of my life.",
+      "vitals": {
+        "hr": 88,
+        "bp_sys": 180,
+        "bp_dia": 110,
+        "spo2": 97,
+        "rr": 18,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 55,
+        "gender": "female",
+        "relevant_PMH": "migraines",
+        "time_course": "15 minutes"
+      }
+    },
+    {
+      "chief_complaint": "I feel really confused and my left side feels weird and weak.",
+      "vitals": {
+        "hr": 76,
+        "bp_sys": 150,
+        "bp_dia": 90,
+        "spo2": 96,
+        "rr": 16,
+        "temp": 36.7,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 72,
+        "gender": "male",
+        "relevant_PMH": "atrial fibrillation",
+        "time_course": "1 hour"
+      }
+    },
+    {
+      "chief_complaint": "My toddler is burning up and won't respond properly.",
+      "vitals": {
+        "hr": 160,
+        "bp_sys": 70,
+        "bp_dia": 40,
+        "spo2": 92,
+        "rr": 30,
+        "temp": 40.2,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 2,
+        "gender": "female",
+        "relevant_PMH": "none",
+        "time_course": "3 hours"
+      }
+    },
+    {
+      "chief_complaint": "I fell off a ladder and now my back really hurts.",
+      "vitals": {
+        "hr": 105,
+        "bp_sys": 100,
+        "bp_dia": 65,
+        "spo2": 95,
+        "rr": 22,
+        "temp": 36.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 47,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "30 minutes"
+      }
+    },
+    {
+      "chief_complaint": "I'm in agony, my stomach is killing me!",
+      "vitals": {
+        "hr": 115,
+        "bp_sys": 85,
+        "bp_dia": 55,
+        "spo2": 93,
+        "rr": 24,
+        "temp": 37.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 58,
+        "gender": "female",
+        "relevant_PMH": "gallstones",
+        "time_course": "2 hours"
+      }
+    },
+    {
+      "chief_complaint": "I can't feel my legs after diving into the shallow end.",
+      "vitals": {
+        "hr": 88,
+        "bp_sys": 140,
+        "bp_dia": 85,
+        "spo2": 98,
+        "rr": 18,
+        "temp": 36.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 23,
+        "gender": "non-binary",
+        "relevant_PMH": "none",
+        "time_course": "10 minutes"
+      }
+    },
+    {
+      "chief_complaint": "He was shaking all over, but it just stopped.",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 98,
+        "bp_dia": 65,
+        "spo2": 90,
+        "rr": 24,
+        "temp": 38.0,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 9,
+        "gender": "male",
+        "relevant_PMH": "epilepsy",
+        "time_course": "5 minutes"
+      }
+    },
+    {
+      "chief_complaint": "I'm so dizzy, I can't stand up without falling.",
+      "vitals": {
+        "hr": 102,
+        "bp_sys": 95,
+        "bp_dia": 60,
+        "spo2": 93,
+        "rr": 18,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 42,
+        "gender": "female",
+        "relevant_PMH": "diabetes",
+        "time_course": "1 hour"
+      }
+    },
+    {
+      "chief_complaint": "I have this sharp pain in my chest and I feel breathless.",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 85,
+        "bp_dia": 55,
+        "spo2": 91,
+        "rr": 28,
+        "temp": 37.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 36,
+        "gender": "transgender female",
+        "relevant_PMH": "asthma",
+        "time_course": "2 hours"
+      }
+    },
+    {
+      "chief_complaint": "My chest is killing me. It started suddenly when I was watching TV.",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 90,
+        "bp_dia": 60,
+        "spo2": 94,
+        "rr": 28,
+        "temp": 36.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 67,
+        "gender": "male",
+        "relevant_PMhistory": "hypertension, smoker",
+        "time_course": "30 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "I feel like I've been hit with the worst headache ever, like a thunderclap in my head.",
+      "vitals": {
+        "hr": 100,
+        "bp_sys": 160,
+        "bp_dia": 100,
+        "spo2": 98,
+        "rr": 22,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 54,
+        "gender": "female",
+        "relevant_PMhistory": "migraine sufferer",
+        "time_course": "15 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "I suddenly can't move my right arm and my face feels funny.",
+      "vitals": {
+        "hr": 88,
+        "bp_sys": 170,
+        "bp_dia": 110,
+        "spo2": 95,
+        "rr": 18,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 59,
+        "gender": "female",
+        "relevant_PMhistory": "type 2 diabetes",
+        "time_course": "1 hour ago"
+      }
+    },
+    {
+      "chief_complaint": "My baby is burning up and really drowsy. It's scaring me.",
+      "vitals": {
+        "hr": 180,
+        "bp_sys": 80,
+        "bp_dia": 50,
+        "spo2": 92,
+        "rr": 40,
+        "temp": 40.2,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 2,
+        "gender": "male",
+        "relevant_PMhistory": "none",
+        "time_course": "fever for 2 days, worsened in the last hour"
+      }
+    },
+    {
+      "chief_complaint": "I fell down the stairs and can't feel my legs.",
+      "vitals": {
+        "hr": 95,
+        "bp_sys": 108,
+        "bp_dia": 72,
+        "spo2": 97,
+        "rr": 20,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 35,
+        "gender": "male",
+        "relevant_PMhistory": "none",
+        "time_course": "30 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "I'm in agony from my stomach. It feels like something's gonna burst.",
+      "vitals": {
+        "hr": 120,
+        "bp_sys": 85,
+        "bp_dia": 55,
+        "spo2": 96,
+        "rr": 24,
+        "temp": 38.1,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 40,
+        "gender": "female",
+        "relevant_PMhistory": "prior appendectomy",
+        "time_course": "started 2 hours ago, worsening"
+      }
+    },
+    {
+      "chief_complaint": "I had a seizure and now I'm confused and weak on one side.",
+      "vitals": {
+        "hr": 102,
+        "bp_sys": 140,
+        "bp_dia": 85,
+        "spo2": 98,
+        "rr": 22,
+        "temp": 37.5,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 28,
+        "gender": "female",
+        "relevant_PMhistory": "epilepsy",
+        "time_course": "seizure 20 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "My son was hit by a car. He's awake but not responding well.",
+      "vitals": {
+        "hr": 112,
+        "bp_sys": 105,
+        "bp_dia": 70,
+        "spo2": 93,
+        "rr": 25,
+        "temp": 36.6,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 12,
+        "gender": "male",
+        "relevant_PMhistory": "none",
+        "time_course": "accident 15 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "I've got a splitting headache and can't stop vomiting.",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 150,
+        "bp_dia": 95,
+        "spo2": 97,
+        "rr": 20,
+        "temp": 36.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 45,
+        "gender": "male",
+        "relevant_PMhistory": "high blood pressure",
+        "time_course": "started suddenly 1 hour ago"
+      }
+    },
+    {
+      "chief_complaint": "My whole back feels like it's on fire after lifting a heavy box.",
+      "vitals": {
+        "hr": 100,
+        "bp_sys": 132,
+        "bp_dia": 85,
+        "spo2": 96,
+        "rr": 18,
+        "temp": 37.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 50,
+        "gender": "female",
+        "relevant_PMhistory": "chronic lower back pain",
+        "time_course": "1 hour ago"
+      }
+    },
+    {
+      "chief_complaint": "It feels like an elephant is sitting on my chest!",
+      "vitals": {
+        "hr": 112,
+        "bp_sys": 92,
+        "bp_dia": 60,
+        "spo2": 89,
+        "rr": 28,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 54,
+        "gender": "male",
+        "relevant_PMH": "hypertension, smoker",
+        "time_course": "30 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "My head... it's like a bolt of lightning hit me!",
+      "vitals": {
+        "hr": 84,
+        "bp_sys": 145,
+        "bp_dia": 88,
+        "spo2": 97,
+        "rr": 18,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 29,
+        "gender": "female",
+        "relevant_PMH": "migraine",
+        "time_course": "10 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "I can't feel my right arm and leg.",
+      "vitals": {
+        "hr": 78,
+        "bp_sys": 150,
+        "bp_dia": 95,
+        "spo2": 96,
+        "rr": 20,
+        "temp": 36.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 67,
+        "gender": "male",
+        "relevant_PMH": "diabetes, previous TIA",
+        "time_course": "started 1 hour ago"
+      }
+    },
+    {
+      "chief_complaint": "My son is so hot and won't stop crying.",
+      "vitals": {
+        "hr": 140,
+        "bp_sys": 100,
+        "bp_dia": 65,
+        "spo2": 94,
+        "rr": 40,
+        "temp": 40.2,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 2,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "since last night"
+      }
+    },
+    {
+      "chief_complaint": "I fell off my bike and my back is killing me!",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 105,
+        "bp_dia": 70,
+        "spo2": 98,
+        "rr": 22,
+        "temp": 37.3,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 21,
+        "gender": "female",
+        "relevant_PMH": "none",
+        "time_course": "30 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "My stomach is in agony, I can't even move!",
+      "vitals": {
+        "hr": 120,
+        "bp_sys": 95,
+        "bp_dia": 60,
+        "spo2": 97,
+        "rr": 22,
+        "temp": 37.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 36,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "2 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "I saw a car crash happen right in front of me!",
+      "vitals": {
+        "hr": 115,
+        "bp_sys": 90,
+        "bp_dia": 55,
+        "spo2": 93,
+        "rr": 30,
+        "temp": 36.6,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 40,
+        "gender": "female",
+        "relevant_PMH": "anxiety",
+        "time_course": "15 minutes ago"
+      }
+    },
+    {
+      "chief_complaint": "My child is burning up and hardly responding.",
+      "vitals": {
+        "hr": 150,
+        "bp_sys": 85,
+        "bp_dia": 50,
+        "spo2": 92,
+        "rr": 36,
+        "temp": 41.0,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 5,
+        "gender": "male",
+        "relevant_PMH": "asthma",
+        "time_course": "started this morning"
+      }
+    },
+    {
+      "chief_complaint": "I was playing football and heard a snap in my back.",
+      "vitals": {
+        "hr": 100,
+        "bp_sys": 110,
+        "bp_dia": 70,
+        "spo2": 98,
+        "rr": 20,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 16,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "1 hour ago"
+      }
+    },
+    {
+      "chief_complaint": "I had a fit and everything went blank for a while.",
+      "vitals": {
+        "hr": 98,
+        "bp_sys": 130,
+        "bp_dia": 85,
+        "spo2": 95,
+        "rr": 18,
+        "temp": 37.1,
+        "avpu": "P"
+      },
+      "history": {
+        "age": 46,
+        "gender": "female",
+        "relevant_PMH": "epilepsy",
+        "time_course": "stopped about 5 minutes ago"
+      }
+    }
+  ],
+  "3": [
+    {
+      "chief_complaint": "I can't catch my breath, it's been getting worse since yesterday.",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 135,
+        "bp_dia": 85,
+        "spo2": 88,
+        "rr": 26,
+        "temp": 37.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 67,
+        "gender": "male",
+        "relevant_PMH": "COPD",
+        "time_course": "Symptoms worsening over 24 hours"
+      }
+    },
+    {
+      "chief_complaint": "My leg is really swollen and it hurts to walk.",
+      "vitals": {
+        "hr": 90,
+        "bp_sys": 120,
+        "bp_dia": 80,
+        "spo2": 96,
+        "rr": 18,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 54,
+        "gender": "female",
+        "relevant_PMH": "None",
+        "time_course": "Swelling started two days ago"
+      }
+    },
+    {
+      "chief_complaint": "My back hurts so much, and I've been throwing up for hours.",
+      "vitals": {
+        "hr": 100,
+        "bp_sys": 125,
+        "bp_dia": 85,
+        "spo2": 97,
+        "rr": 20,
+        "temp": 38.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 45,
+        "gender": "male",
+        "relevant_PMH": "Kidney stones",
+        "time_course": "Pain started 8 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "My ankle is swollen and it hurts a lot, but I don't remember falling.",
+      "vitals": {
+        "hr": 88,
+        "bp_sys": 115,
+        "bp_dia": 75,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 30,
+        "gender": "female",
+        "relevant_PMH": "None",
+        "time_course": "Swelling and pain started this morning"
+      }
+    },
+    {
+      "chief_complaint": "It hurts to take a deep breath, and I feel out of breath.",
+      "vitals": {
+        "hr": 102,
+        "bp_sys": 122,
+        "bp_dia": 78,
+        "spo2": 94,
+        "rr": 22,
+        "temp": 37.1,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 40,
+        "gender": "male",
+        "relevant_PMH": "Asthma",
+        "time_course": "Symptoms started 12 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "Her leg is red and painful, she's been running a fever.",
+      "vitals": {
+        "hr": 95,
+        "bp_sys": 115,
+        "bp_dia": 75,
+        "spo2": 97,
+        "rr": 18,
+        "temp": 38.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 60,
+        "gender": "female",
+        "relevant_PMH": "Diabetes",
+        "time_course": "Leg redness and fever started yesterday"
+      }
+    },
+    {
+      "chief_complaint": "I keep throwing up and I have this awful pain in my side.",
+      "vitals": {
+        "hr": 105,
+        "bp_sys": 130,
+        "bp_dia": 85,
+        "spo2": 98,
+        "rr": 20,
+        "temp": 37.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 32,
+        "gender": "female",
+        "relevant_PMH": "None",
+        "time_course": "Symptoms started 10 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "I'm feeling really confused, I can't remember much.",
+      "vitals": {
+        "hr": 82,
+        "bp_sys": 130,
+        "bp_dia": 80,
+        "spo2": 96,
+        "rr": 18,
+        "temp": 37.2,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 82,
+        "gender": "male",
+        "relevant_PMH": "Hypertension",
+        "time_course": "Confusion began 3 days ago"
+      }
+    },
+    {
+      "chief_complaint": "My tummy really hurts and I have a fever.",
+      "vitals": {
+        "hr": 112,
+        "bp_sys": 118,
+        "bp_dia": 76,
+        "spo2": 97,
+        "rr": 22,
+        "temp": 38.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 36,
+        "gender": "female",
+        "relevant_PMH": "Recurrent UTIs",
+        "time_course": "Pain started yesterday"
+      }
+    },
+    {
+      "chief_complaint": "The left side of my back is killing me. It hurts to move.",
+      "vitals": {
+        "hr": 95,
+        "bp_sys": 120,
+        "bp_dia": 80,
+        "spo2": 99,
+        "rr": 18,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 50,
+        "gender": "female",
+        "relevant_PMH": "None",
+        "time_course": "Pain started suddenly 5 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "My back hurts so bad, and I've been throwing up since yesterday.",
+      "vitals": {
+        "hr": 112,
+        "bp_sys": 110,
+        "bp_dia": 70,
+        "spo2": 96,
+        "rr": 24,
+        "temp": 38.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 32,
+        "gender": "female",
+        "relevant_PMH": "none",
+        "time_course": "pain and vomiting started 12 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "My leg is really swollen and hurts when I move.",
+      "vitals": {
+        "hr": 89,
+        "bp_sys": 132,
+        "bp_dia": 84,
+        "spo2": 98,
+        "rr": 17,
+        "temp": 37.3,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 56,
+        "gender": "male",
+        "relevant_PMH": "history of varicose veins",
+        "time_course": "swelling started 2 days ago"
+      }
+    },
+    {
+      "chief_complaint": "I've been coughing and struggling to breathe more than usual.",
+      "vitals": {
+        "hr": 108,
+        "bp_sys": 142,
+        "bp_dia": 88,
+        "spo2": 92,
+        "rr": 26,
+        "temp": 37.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 70,
+        "gender": "female",
+        "relevant_PMH": "COPD",
+        "time_course": "worsening over the last 3 days"
+      }
+    },
+    {
+      "chief_complaint": "I keep forgetting things and feel really confused.",
+      "vitals": {
+        "hr": 95,
+        "bp_sys": 130,
+        "bp_dia": 75,
+        "spo2": 97,
+        "rr": 18,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 82,
+        "gender": "male",
+        "relevant_PMH": "hypertension, mild cognitive impairment",
+        "time_course": "confusion worsened over 24 hours"
+      }
+    },
+    {
+      "chief_complaint": "My side hurts a lot, and I can't keep anything down.",
+      "vitals": {
+        "hr": 115,
+        "bp_sys": 105,
+        "bp_dia": 65,
+        "spo2": 95,
+        "rr": 20,
+        "temp": 37.6,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 45,
+        "gender": "male",
+        "relevant_PMH": "kidney stones",
+        "time_course": "pain started suddenly 10 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "My leg is hurting and red, and I'm feeling feverish.",
+      "vitals": {
+        "hr": 102,
+        "bp_sys": 118,
+        "bp_dia": 78,
+        "spo2": 98,
+        "rr": 18,
+        "temp": 38.1,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 39,
+        "gender": "female",
+        "relevant_PMH": "diabetes",
+        "time_course": "redness and pain for 3 days"
+      }
+    },
+    {
+      "chief_complaint": "I'm wheezing a lot, and my inhaler isn't helping.",
+      "vitals": {
+        "hr": 120,
+        "bp_sys": 126,
+        "bp_dia": 82,
+        "spo2": 89,
+        "rr": 28,
+        "temp": 37.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 25,
+        "gender": "female",
+        "relevant_PMH": "asthma",
+        "time_course": "symptoms worsened in last 8 hours"
+      }
+    },
+    {
+      "chief_complaint": "My back really hurts, and I'm peeing a lot.",
+      "vitals": {
+        "hr": 105,
+        "bp_sys": 115,
+        "bp_dia": 70,
+        "spo2": 96,
+        "rr": 20,
+        "temp": 38.4,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 48,
+        "gender": "male",
+        "relevant_PMH": "recurrent UTIs",
+        "time_course": "symptoms started 24 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "My ankle hurts so much, and it's hard to walk on it.",
+      "vitals": {
+        "hr": 98,
+        "bp_sys": 132,
+        "bp_dia": 84,
+        "spo2": 97,
+        "rr": 18,
+        "temp": 37.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 29,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "injury happened while playing football 4 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "My chest hurts when I take a deep breath.",
+      "vitals": {
+        "hr": 104,
+        "bp_sys": 124,
+        "bp_dia": 80,
+        "spo2": 95,
+        "rr": 22,
+        "temp": 37.4,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 52,
+        "gender": "female",
+        "relevant_PMH": "smoker",
+        "time_course": "started this morning"
+      }
+    },
+    {
+      "chief_complaint": "I've been wheezing and can't catch my breath sometimes.",
+      "vitals": {
+        "hr": 110,
+        "bp_sys": 140,
+        "bp_dia": 90,
+        "spo2": 91,
+        "rr": 28,
+        "temp": 36.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 65,
+        "gender": "male",
+        "relevant_pmh": "COPD",
+        "time_course": "2 days"
+      }
+    },
+    {
+      "chief_complaint": "My leg is swollen and hurts when I walk.",
+      "vitals": {
+        "hr": 95,
+        "bp_sys": 125,
+        "bp_dia": 80,
+        "spo2": 98,
+        "rr": 20,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 45,
+        "gender": "female",
+        "relevant_pmh": null,
+        "time_course": "3 days"
+      }
+    },
+    {
+      "chief_complaint": "My lower back hurts and I feel sick to my stomach.",
+      "vitals": {
+        "hr": 100,
+        "bp_sys": 130,
+        "bp_dia": 85,
+        "spo2": 97,
+        "rr": 22,
+        "temp": 38.1,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 34,
+        "gender": "male",
+        "relevant_pmh": "History of kidney stones",
+        "time_course": "12 hours"
+      }
+    },
+    {
+      "chief_complaint": "I've been feeling weak and confused since last night.",
+      "vitals": {
+        "hr": 82,
+        "bp_sys": 115,
+        "bp_dia": 75,
+        "spo2": 96,
+        "rr": 18,
+        "temp": 37.2,
+        "avpu": "V"
+      },
+      "history": {
+        "age": 78,
+        "gender": "female",
+        "relevant_pmh": "Hypertension",
+        "time_course": "8 hours"
+      }
+    },
+    {
+      "chief_complaint": "I can't keep anything down, I keep throwing up.",
+      "vitals": {
+        "hr": 120,
+        "bp_sys": 110,
+        "bp_dia": 70,
+        "spo2": 99,
+        "rr": 18,
+        "temp": 37.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 22,
+        "gender": "male",
+        "relevant_pmh": null,
+        "time_course": "24 hours"
+      }
+    },
+    {
+      "chief_complaint": "My hand is swollen and red, it's really sore.",
+      "vitals": {
+        "hr": 88,
+        "bp_sys": 120,
+        "bp_dia": 80,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 37.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 55,
+        "gender": "female",
+        "relevant_pmh": "Diabetes",
+        "time_course": "2 days"
+      }
+    },
+    {
+      "chief_complaint": "It hurts on the side when I breathe in.",
+      "vitals": {
+        "hr": 105,
+        "bp_sys": 130,
+        "bp_dia": 85,
+        "spo2": 94,
+        "rr": 24,
+        "temp": 37.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 48,
+        "gender": "male",
+        "relevant_pmh": "Smoker",
+        "time_course": "1 day"
+      }
+    },
+    {
+      "chief_complaint": "My urine is super cloudy and my back hurts a lot.",
+      "vitals": {
+        "hr": 115,
+        "bp_sys": 125,
+        "bp_dia": 78,
+        "spo2": 97,
+        "rr": 20,
+        "temp": 38.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 32,
+        "gender": "female",
+        "relevant_pmh": "Frequent UTIs",
+        "time_course": "18 hours"
+      }
+    },
+    {
+      "chief_complaint": "I fell and now my arm hurts bad, it's swollen too.",
+      "vitals": {
+        "hr": 90,
+        "bp_sys": 135,
+        "bp_dia": 88,
+        "spo2": 99,
+        "rr": 18,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 29,
+        "gender": "female",
+        "relevant_pmh": null,
+        "time_course": "3 hours"
+      }
+    },
+    {
+      "chief_complaint": "I'm having a hard time breathing and my chest feels tight.",
+      "vitals": {
+        "hr": 130,
+        "bp_sys": 140,
+        "bp_dia": 92,
+        "spo2": 92,
+        "rr": 30,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 18,
+        "gender": "male",
+        "relevant_pmh": "Asthma",
+        "time_course": "6 hours"
+      }
+    }
+  ],
+  "4": [
+    {
+      "chief_complaint": "My wrist's been hurting since yesterday after I tripped. It's not too bad, but still hurts.",
+      "vitals": {
+        "hr": 82,
+        "bp_sys": 128,
+        "bp_dia": 75,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 29,
+        "gender": "female",
+        "relevant PMH": "none",
+        "time course": "pain started 24 hours ago after fall"
+      }
+    },
+    {
+      "chief_complaint": "I've got this itchy rash on my ankle after being outdoors. It's been a day.",
+      "vitals": {
+        "hr": 75,
+        "bp_sys": 120,
+        "bp_dia": 80,
+        "spo2": 99,
+        "rr": 15,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 41,
+        "gender": "male",
+        "relevant PMH": "seasonal allergies",
+        "time course": "itchy rash noticed 24 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "I've been peeing a lot more than usual and it kind of stings. It's been happening for two days.",
+      "vitals": {
+        "hr": 78,
+        "bp_sys": 110,
+        "bp_dia": 70,
+        "spo2": 98,
+        "rr": 18,
+        "temp": 37.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 52,
+        "gender": "female",
+        "relevant PMH": "recurrent UTIs",
+        "time course": "symptoms started 2 days ago"
+      }
+    },
+    {
+      "chief_complaint": "My ear's been aching and it's hard to hear out of it since yesterday morning.",
+      "vitals": {
+        "hr": 88,
+        "bp_sys": 125,
+        "bp_dia": 78,
+        "spo2": 99,
+        "rr": 17,
+        "temp": 37.3,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 6,
+        "gender": "male",
+        "relevant PMH": "frequent ear infections",
+        "time course": "symptoms started yesterday morning"
+      }
+    },
+    {
+      "chief_complaint": "I have this weird bump on my eyelid for the last three days. It's kind of irritated.",
+      "vitals": {
+        "hr": 70,
+        "bp_sys": 115,
+        "bp_dia": 72,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 36.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 24,
+        "gender": "female",
+        "relevant PMH": "none",
+        "time course": "noticed the bump 3 days ago"
+      }
+    },
+    {
+      "chief_complaint": "The back of my hand got hit during a game and it's been bruised and sore for two days now.",
+      "vitals": {
+        "hr": 83,
+        "bp_sys": 130,
+        "bp_dia": 80,
+        "spo2": 99,
+        "rr": 15,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 34,
+        "gender": "male",
+        "relevant PMH": "none",
+        "time course": "injury occurred 2 days ago"
+      }
+    },
+    {
+      "chief_complaint": "My daughter's had this cough and a bit of a fever for the past day. She's still playing, though.",
+      "vitals": {
+        "hr": 95,
+        "bp_sys": 105,
+        "bp_dia": 65,
+        "spo2": 97,
+        "rr": 20,
+        "temp": 38.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 3,
+        "gender": "female",
+        "relevant PMH": "none",
+        "time course": "symptoms began 24 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "I got a small cut on my finger two days ago, and it's a little red and sore now.",
+      "vitals": {
+        "hr": 76,
+        "bp_sys": 118,
+        "bp_dia": 74,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 37.1,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 47,
+        "gender": "male",
+        "relevant PMH": "type 2 diabetes",
+        "time course": "injury occurred 2 days ago"
+      }
+    },
+    {
+      "chief_complaint": "I've had a headache that's lingered for a few days now. It's not super painful, but annoying.",
+      "vitals": {
+        "hr": 73,
+        "bp_sys": 115,
+        "bp_dia": 78,
+        "spo2": 99,
+        "rr": 14,
+        "temp": 36.6,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 58,
+        "gender": "female",
+        "relevant PMH": "chronic migraines",
+        "time course": "headache ongoing for 3 days"
+      }
+    },
+    {
+      "chief_complaint": "I sprained my ankle a couple of days ago, and it's swollen and a bit stiff.",
+      "vitals": {
+        "hr": 79,
+        "bp_sys": 122,
+        "bp_dia": 76,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 22,
+        "gender": "non-binary",
+        "relevant PMH": "none",
+        "time course": "injury occurred 2 days ago"
+      }
+    },
+    {
+      "chief_complaint": "My son has been complaining of ear pain since yesterday.",
+      "vitals": {
+        "hr": 86,
+        "bp_sys": 108,
+        "bp_dia": 72,
+        "spo2": 98,
+        "rr": 18,
+        "temp": 37.6,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 5,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "24 hours"
+      }
+    },
+    {
+      "chief_complaint": "I've had this low back ache for two days, especially when I bend over.",
+      "vitals": {
+        "hr": 78,
+        "bp_sys": 124,
+        "bp_dia": 80,
+        "spo2": 99,
+        "rr": 16,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 34,
+        "gender": "female",
+        "relevant_PMH": "none",
+        "time_course": "2 days"
+      }
+    },
+    {
+      "chief_complaint": "I tripped and scraped my knee, it's pretty sore and red now.",
+      "vitals": {
+        "hr": 92,
+        "bp_sys": 118,
+        "bp_dia": 78,
+        "spo2": 97,
+        "rr": 17,
+        "temp": 37.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 28,
+        "gender": "non-binary",
+        "relevant_PMH": "none",
+        "time_course": "12 hours"
+      }
+    },
+    {
+      "chief_complaint": "I have a sore throat and it's been feeling swollen since last night.",
+      "vitals": {
+        "hr": 80,
+        "bp_sys": 120,
+        "bp_dia": 78,
+        "spo2": 98,
+        "rr": 18,
+        "temp": 38.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 19,
+        "gender": "female",
+        "relevant_PMH": "tonsillitis",
+        "time_course": "1 night"
+      }
+    },
+    {
+      "chief_complaint": "I got stung by a bee and my arm is swollen but I feel fine.",
+      "vitals": {
+        "hr": 84,
+        "bp_sys": 122,
+        "bp_dia": 76,
+        "spo2": 99,
+        "rr": 16,
+        "temp": 36.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 42,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "6 hours"
+      }
+    },
+    {
+      "chief_complaint": "I've had this burning when I pee for two days, it's getting annoying.",
+      "vitals": {
+        "hr": 88,
+        "bp_sys": 118,
+        "bp_dia": 74,
+        "spo2": 98,
+        "rr": 17,
+        "temp": 37.1,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 37,
+        "gender": "female",
+        "relevant_PMH": "recurrent UTIs",
+        "time_course": "2 days"
+      }
+    },
+    {
+      "chief_complaint": "My ankle's been hurting since I twisted it yesterday but I can walk.",
+      "vitals": {
+        "hr": 82,
+        "bp_sys": 126,
+        "bp_dia": 82,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 29,
+        "gender": "male",
+        "relevant_PMH": "none",
+        "time_course": "1 day"
+      }
+    },
+    {
+      "chief_complaint": "I think I have a cold, my nose is runny and I feel a bit tired.",
+      "vitals": {
+        "hr": 74,
+        "bp_sys": 115,
+        "bp_dia": 76,
+        "spo2": 99,
+        "rr": 18,
+        "temp": 37.4,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 25,
+        "gender": "female",
+        "relevant_PMH": "none",
+        "time_course": "3 days"
+      }
+    },
+    {
+      "chief_complaint": "I have a headache and my sinus feels stuffed up since this morning.",
+      "vitals": {
+        "hr": 76,
+        "bp_sys": 122,
+        "bp_dia": 80,
+        "spo2": 99,
+        "rr": 16,
+        "temp": 37.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 45,
+        "gender": "male",
+        "relevant_PMH": "sinusitis",
+        "time_course": "since morning"
+      }
+    },
+    {
+      "chief_complaint": "I've had this itchy rash on my arm for a few days, it's not going away.",
+      "vitals": {
+        "hr": 72,
+        "bp_sys": 120,
+        "bp_dia": 76,
+        "spo2": 98,
+        "rr": 17,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 32,
+        "gender": "female",
+        "relevant_PMH": "eczema",
+        "time_course": "few days"
+      }
+    },
+    {
+      "chief_complaint": "My ankle's a bit sore, I twisted it stepping off the curb yesterday.",
+      "vitals": {
+        "hr": 82,
+        "bp_sys": 118,
+        "bp_dia": 76,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 34,
+        "gender": "female",
+        "relevant_pmh": "None",
+        "time_course": "Pain started 24 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "I've got a runny nose and scratchy throat since last night.",
+      "vitals": {
+        "hr": 78,
+        "bp_sys": 120,
+        "bp_dia": 80,
+        "spo2": 99,
+        "rr": 18,
+        "temp": 37.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 29,
+        "gender": "male",
+        "relevant_pmh": "Seasonal allergies",
+        "time_course": "Symptoms started 12 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "I think I have a UTI again. It's uncomfortable when I pee.",
+      "vitals": {
+        "hr": 85,
+        "bp_sys": 110,
+        "bp_dia": 70,
+        "spo2": 97,
+        "rr": 16,
+        "temp": 37.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 52,
+        "gender": "female",
+        "relevant_pmh": "Recurrent UTIs",
+        "time_course": "Symptoms began 2 days ago"
+      }
+    },
+    {
+      "chief_complaint": "My daughter has been pulling at her ear and crying more than usual.",
+      "vitals": {
+        "hr": 90,
+        "bp_sys": 104,
+        "bp_dia": 68,
+        "spo2": 99,
+        "rr": 20,
+        "temp": 38.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 3,
+        "gender": "female",
+        "relevant_pmh": "None",
+        "time_course": "Started last night"
+      }
+    },
+    {
+      "chief_complaint": "Got stung by a bee, it's a bit swollen but not too bad.",
+      "vitals": {
+        "hr": 88,
+        "bp_sys": 115,
+        "bp_dia": 75,
+        "spo2": 98,
+        "rr": 17,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 45,
+        "gender": "male",
+        "relevant_pmh": "None",
+        "time_course": "Happened 3 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "My knee hurts from a soccer match yesterday, just a bit swollen.",
+      "vitals": {
+        "hr": 95,
+        "bp_sys": 112,
+        "bp_dia": 72,
+        "spo2": 98,
+        "rr": 15,
+        "temp": 36.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 17,
+        "gender": "male",
+        "relevant_pmh": "None",
+        "time_course": "Pain started 18 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "Cut my finger while chopping vegetables, it's not deep but still bleeds a bit.",
+      "vitals": {
+        "hr": 80,
+        "bp_sys": 120,
+        "bp_dia": 78,
+        "spo2": 99,
+        "rr": 16,
+        "temp": 36.6,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 28,
+        "gender": "female",
+        "relevant_pmh": "None",
+        "time_course": "Injury occurred 2 hours ago"
+      }
+    },
+    {
+      "chief_complaint": "I've had this cough and stuffy nose for a couple of days.",
+      "vitals": {
+        "hr": 76,
+        "bp_sys": 118,
+        "bp_dia": 79,
+        "spo2": 97,
+        "rr": 18,
+        "temp": 37.3,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 40,
+        "gender": "female",
+        "relevant_pmh": "Asthma, controlled",
+        "time_course": "Symptoms started 3 days ago"
+      }
+    },
+    {
+      "chief_complaint": "I've been getting these headaches off and on, but they're not too bad.",
+      "vitals": {
+        "hr": 82,
+        "bp_sys": 130,
+        "bp_dia": 85,
+        "spo2": 98,
+        "rr": 14,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 48,
+        "gender": "male",
+        "relevant_pmh": "Hypertension",
+        "time_course": "Headaches started a week ago"
+      }
+    },
+    {
+      "chief_complaint": "My wrist is swollen, I think I sprained it when I fell off my bike yesterday.",
+      "vitals": {
+        "hr": 88,
+        "bp_sys": 116,
+        "bp_dia": 74,
+        "spo2": 99,
+        "rr": 16,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 23,
+        "gender": "female",
+        "relevant_pmh": "None",
+        "time_course": "Injury happened 24 hours ago"
+      }
+    }
+  ],
+  "5": [
+    {
+      "chief_complaint": "I need a refill on my blood pressure medicine.",
+      "vitals": {
+        "hr": 78,
+        "bp_sys": 135,
+        "bp_dia": 85,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 62,
+        "gender": "female",
+        "relevant_pmh": "hypertension",
+        "time_course": "ongoing for years"
+      }
+    },
+    {
+      "chief_complaint": "My back's been aching for a few weeks now, it's not getting worse but it's annoying.",
+      "vitals": {
+        "hr": 72,
+        "bp_sys": 120,
+        "bp_dia": 78,
+        "spo2": 99,
+        "rr": 14,
+        "temp": 36.6,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 45,
+        "gender": "male",
+        "relevant_pmh": "none",
+        "time_course": "3 weeks"
+      }
+    },
+    {
+      "chief_complaint": "I've got this itchy rash that's not going away.",
+      "vitals": {
+        "hr": 76,
+        "bp_sys": 118,
+        "bp_dia": 76,
+        "spo2": 98,
+        "rr": 15,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 34,
+        "gender": "non-binary",
+        "relevant_pmh": "eczema",
+        "time_course": "1 week"
+      }
+    },
+    {
+      "chief_complaint": "I came for my diabetes medication review.",
+      "vitals": {
+        "hr": 80,
+        "bp_sys": 130,
+        "bp_dia": 82,
+        "spo2": 97,
+        "rr": 17,
+        "temp": 36.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 58,
+        "gender": "female",
+        "relevant_pmh": "type 2 diabetes",
+        "time_course": "stable"
+      }
+    },
+    {
+      "chief_complaint": "I've had a runny nose and a slight cold for a couple of weeks.",
+      "vitals": {
+        "hr": 68,
+        "bp_sys": 115,
+        "bp_dia": 75,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 37.2,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 28,
+        "gender": "male",
+        "relevant_pmh": "none",
+        "time_course": "2 weeks"
+      }
+    },
+    {
+      "chief_complaint": "I've been having headaches every now and then, nothing too bad.",
+      "vitals": {
+        "hr": 74,
+        "bp_sys": 122,
+        "bp_dia": 80,
+        "spo2": 98,
+        "rr": 15,
+        "temp": 36.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 39,
+        "gender": "female",
+        "relevant_pmh": "migraines",
+        "time_course": "intermittent over 3 weeks"
+      }
+    },
+    {
+      "chief_complaint": "I've been feeling a bit bloated, it's been a while now.",
+      "vitals": {
+        "hr": 70,
+        "bp_sys": 118,
+        "bp_dia": 79,
+        "spo2": 99,
+        "rr": 14,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 50,
+        "gender": "male",
+        "relevant_pmh": "irritable bowel syndrome",
+        "time_course": "4 weeks"
+      }
+    },
+    {
+      "chief_complaint": "I need a note for work because I've been home with a cold.",
+      "vitals": {
+        "hr": 72,
+        "bp_sys": 120,
+        "bp_dia": 80,
+        "spo2": 97,
+        "rr": 18,
+        "temp": 37.1,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 31,
+        "gender": "female",
+        "relevant_pmh": "none",
+        "time_course": "5 days"
+      }
+    },
+    {
+      "chief_complaint": "I have these mild muscle cramps that come and go.",
+      "vitals": {
+        "hr": 75,
+        "bp_sys": 121,
+        "bp_dia": 79,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 36.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 47,
+        "gender": "non-binary",
+        "relevant_pmh": "slight electrolyte imbalance",
+        "time_course": "intermittent for 2 weeks"
+      }
+    },
+    {
+      "chief_complaint": "I'm here for my annual asthma check-up.",
+      "vitals": {
+        "hr": 70,
+        "bp_sys": 119,
+        "bp_dia": 78,
+        "spo2": 96,
+        "rr": 17,
+        "temp": 36.6,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 22,
+        "gender": "male",
+        "relevant_pmh": "asthma",
+        "time_course": "control is good"
+      }
+    },
+    {
+      "chief_complaint": "I've run out of my blood pressure pills, can I get a new prescription?",
+      "vitals": {
+        "hr": 72,
+        "bp_sys": 130,
+        "bp_dia": 85,
+        "spo2": 98,
+        "rr": 16,
+        "temp": 36.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 67,
+        "gender": "male",
+        "relevant PMH": "hypertension",
+        "time course": "last refill was 3 months ago"
+      }
+    },
+    {
+      "chief_complaint": "I've got this itchy patch on my arm, it's been there for a while now.",
+      "vitals": {
+        "hr": 78,
+        "bp_sys": 122,
+        "bp_dia": 80,
+        "spo2": 98,
+        "rr": 14,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 22,
+        "gender": "female",
+        "relevant PMH": "eczema",
+        "time course": "3 weeks"
+      }
+    },
+    {
+      "chief_complaint": "I need a sick note for work, I've had this back ache on and off for a month.",
+      "vitals": {
+        "hr": 70,
+        "bp_sys": 128,
+        "bp_dia": 82,
+        "spo2": 99,
+        "rr": 15,
+        "temp": 37.0,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 36,
+        "gender": "male",
+        "relevant PMH": "recurrent low back pain",
+        "time course": "1 month"
+      }
+    },
+    {
+      "chief_complaint": "I'm here for my regular diabetes medication check-up.",
+      "vitals": {
+        "hr": 74,
+        "bp_sys": 125,
+        "bp_dia": 78,
+        "spo2": 97,
+        "rr": 16,
+        "temp": 36.7,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 58,
+        "gender": "female",
+        "relevant PMH": "type 2 diabetes",
+        "time course": "routine check-up"
+      }
+    },
+    {
+      "chief_complaint": "My knee has been aching for weeks, should I be worried?",
+      "vitals": {
+        "hr": 72,
+        "bp_sys": 120,
+        "bp_dia": 76,
+        "spo2": 98,
+        "rr": 15,
+        "temp": 36.9,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 44,
+        "gender": "female",
+        "relevant PMH": "none",
+        "time course": "6 weeks"
+      }
+    },
+    {
+      "chief_complaint": "I need to get my asthma inhaler refilled, I ran out last week.",
+      "vitals": {
+        "hr": 80,
+        "bp_sys": 118,
+        "bp_dia": 75,
+        "spo2": 99,
+        "rr": 18,
+        "temp": 36.6,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 29,
+        "gender": "male",
+        "relevant PMH": "asthma",
+        "time course": "inhaler finished last week"
+      }
+    },
+    {
+      "chief_complaint": "I've had a headache, just dull, for about two weeks now.",
+      "vitals": {
+        "hr": 68,
+        "bp_sys": 115,
+        "bp_dia": 78,
+        "spo2": 98,
+        "rr": 14,
+        "temp": 37.1,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 40,
+        "gender": "non-binary",
+        "relevant PMH": "migraine",
+        "time course": "2 weeks"
+      }
+    },
+    {
+      "chief_complaint": "Can I get something for these occasional heartburn episodes?",
+      "vitals": {
+        "hr": 76,
+        "bp_sys": 120,
+        "bp_dia": 77,
+        "spo2": 97,
+        "rr": 16,
+        "temp": 36.5,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 55,
+        "gender": "female",
+        "relevant PMH": "none",
+        "time course": "over the past month"
+      }
+    },
+    {
+      "chief_complaint": "This cough won't go away, it's been annoying for about a month.",
+      "vitals": {
+        "hr": 72,
+        "bp_sys": 118,
+        "bp_dia": 75,
+        "spo2": 96,
+        "rr": 17,
+        "temp": 36.8,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 48,
+        "gender": "male",
+        "relevant PMH": "seasonal allergies",
+        "time course": "1 month"
+      }
+    },
+    {
+      "chief_complaint": "Just wanted to see if there's anything I can do for this dry skin, it's been like this for ages.",
+      "vitals": {
+        "hr": 68,
+        "bp_sys": 110,
+        "bp_dia": 70,
+        "spo2": 99,
+        "rr": 15,
+        "temp": 36.4,
+        "avpu": "A"
+      },
+      "history": {
+        "age": 61,
+        "gender": "female",
+        "relevant PMH": "hypothyroidism",
+        "time course": "several months"
+      }
+    }
+  ]
+}

@@ -21,9 +21,12 @@ class Patient:
     
 
 # Manchester Triage System Scenarios
+# Gold-standard scenarios validated against MTS discriminators and clinical guidelines
 SCENARIOS = {
     # Category 1: Immediate (Red) - Life threatening
+    # MTS Discriminators: Airway compromise, Inadequate breathing, Shock, Unresponsive
     1: [
+        # Original scenarios
         {
             "chief_complaint": "I can't breathe... my chest is crushing... the pain goes down my arm.",
             "vitals": {"hr": 120, "bp_sys": 85, "bp_dia": 50, "spo2": 88, "rr": 32, "temp": 36.5, "avpu": "V"},
@@ -38,6 +41,102 @@ SCENARIOS = {
             "chief_complaint": "My face is swelling up and I can't swallow... I ate shellfish.",
             "vitals": {"hr": 130, "bp_sys": 70, "bp_dia": 40, "spo2": 85, "rr": 28, "temp": 37.0, "avpu": "A"},
             "history": "28yo female, known shellfish allergy, stridor audible."
+        },
+        # NEW: STEMI - Classic presentation
+        {
+            "chief_complaint": "There's an elephant sitting on my chest... I feel like I'm going to die.",
+            "vitals": {"hr": 110, "bp_sys": 80, "bp_dia": 55, "spo2": 91, "rr": 28, "temp": 36.8, "avpu": "A"},
+            "history": "58yo male, sweating profusely, nausea, pain radiating to jaw and left arm, 30 mins onset."
+        },
+        # NEW: Acute Stroke - FAST positive
+        {
+            "chief_complaint": "My husband's face has dropped and he can't speak properly!",
+            "vitals": {"hr": 95, "bp_sys": 195, "bp_dia": 110, "spo2": 96, "rr": 18, "temp": 37.0, "avpu": "V"},
+            "history": "70yo male, sudden onset 45 mins ago, right-sided weakness, slurred speech, facial droop."
+        },
+        # NEW: Tension Pneumothorax
+        {
+            "chief_complaint": "I was stabbed... I can't breathe... everything is going dark.",
+            "vitals": {"hr": 135, "bp_sys": 75, "bp_dia": 45, "spo2": 78, "rr": 40, "temp": 36.5, "avpu": "V"},
+            "history": "25yo male, stab wound to right chest, trachea deviated left, absent breath sounds right."
+        },
+        # NEW: Septic Shock
+        {
+            "chief_complaint": "She's been confused all day and now she's going cold and clammy.",
+            "vitals": {"hr": 125, "bp_sys": 70, "bp_dia": 40, "spo2": 88, "rr": 30, "temp": 39.8, "avpu": "V"},
+            "history": "78yo female, recent UTI, mottled skin, delayed capillary refill, drowsy."
+        },
+        # NEW: Major Trauma - MVA
+        {
+            "chief_complaint": "He was thrown from the car... he's not making sense!",
+            "vitals": {"hr": 130, "bp_sys": 85, "bp_dia": 50, "spo2": 90, "rr": 32, "temp": 35.5, "avpu": "V"},
+            "history": "35yo male, unrestrained driver, high-speed RTC, GCS 9, deformed left femur."
+        },
+        # NEW: Massive GI Bleed
+        {
+            "chief_complaint": "I've vomited loads of blood and now I feel faint...",
+            "vitals": {"hr": 140, "bp_sys": 75, "bp_dia": 45, "spo2": 94, "rr": 26, "temp": 36.2, "avpu": "V"},
+            "history": "55yo male, known liver disease, haematemesis x3, melena, pale and diaphoretic."
+        },
+        # NEW: Status Epilepticus
+        {
+            "chief_complaint": "My daughter won't stop fitting! It's been going on for ages!",
+            "vitals": {"hr": 145, "bp_sys": 160, "bp_dia": 95, "spo2": 82, "rr": 8, "temp": 38.5, "avpu": "U"},
+            "history": "8yo female, known epilepsy, continuous tonic-clonic seizure for 12 minutes, cyanosed."
+        },
+        # NEW: DKA with Coma
+        {
+            "chief_complaint": "He's a diabetic and now he won't wake up properly.",
+            "vitals": {"hr": 115, "bp_sys": 90, "bp_dia": 55, "spo2": 95, "rr": 35, "temp": 37.2, "avpu": "P"},
+            "history": "22yo male, Type 1 diabetic, Kussmaul breathing, fruity breath, missed insulin for 3 days."
+        },
+        # NEW: Eclampsia
+        {
+            "chief_complaint": "She's 8 months pregnant and started fitting!",
+            "vitals": {"hr": 120, "bp_sys": 180, "bp_dia": 120, "spo2": 89, "rr": 24, "temp": 37.5, "avpu": "U"},
+            "history": "32yo female, 34 weeks pregnant, seizure witnessed, severe headache and visual disturbance earlier."
+        },
+        # NEW: Complete Airway Obstruction
+        {
+            "chief_complaint": "He was eating steak and now he can't breathe at all!",
+            "vitals": {"hr": 140, "bp_sys": 160, "bp_dia": 100, "spo2": 65, "rr": 0, "temp": 37.0, "avpu": "A"},
+            "history": "60yo male, choking at restaurant, cannot cough or speak, universal choking sign, cyanotic."
+        },
+        # NEW: Haemorrhagic Stroke (SAH)
+        {
+            "chief_complaint": "It's the worst headache of my life... like being hit with a hammer.",
+            "vitals": {"hr": 55, "bp_sys": 200, "bp_dia": 115, "spo2": 94, "rr": 14, "temp": 37.3, "avpu": "V"},
+            "history": "48yo female, sudden onset thunderclap headache, vomiting, photophobia, now drowsy."
+        },
+        # NEW: Ruptured AAA
+        {
+            "chief_complaint": "The pain in my back is unbearable... I feel like I'm going to pass out.",
+            "vitals": {"hr": 125, "bp_sys": 75, "bp_dia": 50, "spo2": 93, "rr": 28, "temp": 36.0, "avpu": "V"},
+            "history": "72yo male, known AAA, sudden severe abdominal/back pain, pulsatile mass, pale and sweating."
+        },
+        # NEW: Atypical ACS (Elderly)
+        {
+            "chief_complaint": "I just feel really unwell... something is very wrong.",
+            "vitals": {"hr": 45, "bp_sys": 80, "bp_dia": 50, "spo2": 88, "rr": 24, "temp": 36.5, "avpu": "V"},
+            "history": "82yo female, known diabetes, vague malaise, nausea, cool and clammy, no chest pain."
+        },
+        # NEW: Meningococcal Septicaemia
+        {
+            "chief_complaint": "My child has a rash that won't go away when I press it!",
+            "vitals": {"hr": 180, "bp_sys": 70, "bp_dia": 40, "spo2": 90, "rr": 45, "temp": 40.2, "avpu": "V"},
+            "history": "4yo male, non-blanching purpuric rash, headache, photophobia, neck stiffness, drowsy."
+        },
+        # NEW: Drowning/Near-drowning
+        {
+            "chief_complaint": "He was pulled from the pool and he's not breathing properly!",
+            "vitals": {"hr": 50, "bp_sys": 70, "bp_dia": 45, "spo2": 60, "rr": 6, "temp": 34.0, "avpu": "U"},
+            "history": "6yo male, submersion ~5 mins, bystander CPR given, now gasping, hypothermic."
+        },
+        # NEW: Severe Burns with Inhalation
+        {
+            "chief_complaint": "She was in a house fire... her voice sounds strange now.",
+            "vitals": {"hr": 130, "bp_sys": 90, "bp_dia": 55, "spo2": 85, "rr": 32, "temp": 37.5, "avpu": "A"},
+            "history": "45yo female, facial burns, singed nasal hairs, hoarse voice, stridor developing."
         },
     ],
     
