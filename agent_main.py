@@ -38,9 +38,12 @@ class Vitals(BaseModel):
 class TaskInput(BaseModel):
     complaint: str
     vitals: Vitals
-    nhs_number: Optional[str] = None  # If provided, fetch demographics from PDS
+    nhs_number: Optional[str] = None
     age: Optional[int] = None
     gender: Optional[str] = None
+    relevant_pmh: Optional[str] = None
+    rr: Optional[int] = 16
+    avpu: Optional[str] = "A"
 
 # ==========================================
 # Agent Core Logic
@@ -106,19 +109,47 @@ class NurseSimTriageAgent:
         self.model = PeftModel.from_pretrained(self.model, adapter_id, token=self.HF_TOKEN)
         self.model.eval()
 
-    def get_response(self, complaint: str, hr: int, bp: str, spo2: int, temp: float) -> str:
+    def get_response(self, complaint: str, hr: int, bp: str, spo2: int, temp: float, rr: int = 16, avpu: str = "A", age: int = 45, gender: str = "Male", pmh: str = "None") -> str:
         """Shared inference logic."""
         if self.model is None:
             return "⚠️ System is warming up. Please try again in 30 seconds."
 
-        prompt = f"""### Instruction:
-You are an expert A&E Triage Nurse. Assess the following patient and provide your triage decision.
+        # Construct History Dictionary (Critical for Model Accuracy)
+        history_dict = {
+            'age': int(age) if age else "Unknown",
+            'gender': gender,
+            'relevant_PMH': pmh if pmh else "None",
+            'time_course': "See complaint"
+        }
+        
+        input_text = f"""PATIENT PRESENTING TO A&E TRIAGE
+
+Chief Complaint: "{complaint}"
+
+Vitals:
+- HR: {hr} bpm
+- BP: {bp} mmHg
+- SpO2: {spo2}%
+- RR: {rr} /min
+- Temp: {temp}C
+- AVPU: {avpu}
+
+History: {history_dict}
+
+WAITING ROOM: 12 patients | AVAILABLE BEDS: 4
+
+What is your triage decision?"""
+
+        prompt = f"""Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
+
+### Instruction:
+You are an expert A&E Triage Nurse using the Manchester Triage System. Assess the following patient and provide your triage decision with clinical reasoning.
 
 ### Input:
-Patient Complaint: {complaint}
-Vitals: HR {hr}, BP {bp}, SpO2 {spo2}%, Temp {temp}C.
+{input_text}
 
-### Response:"""
+### Response:
+"""
         
         inputs = self.tokenizer(prompt, return_tensors="pt").to(self.model.device)
         
@@ -127,13 +158,17 @@ Vitals: HR {hr}, BP {bp}, SpO2 {spo2}%, Temp {temp}C.
                 **inputs,
                 max_new_tokens=256,
                 do_sample=True,
-                temperature=0.7,
+                temperature=0.6,
+                top_p=0.9,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
         
         response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         if "### Response:" in response:
-            response = response.split("### Response:")[-1].strip()
+            try:
+                response = response.split("### Response:")[-1].strip()
+            except Exception:
+                pass
             
         return response
 
@@ -292,42 +327,83 @@ async def api_lookup_patient(request: PatientLookupRequest):
 # Gradio UI Integration
 # ==========================================
 
-def gradio_predict(complaint, hr, bp, spo2, temp):
-    return agent.get_response(complaint, hr, bp, spo2, temp)
+def lookup_patient_ui(nhs_no):
+    """Gradio handler for PDS lookup."""
+    if not nhs_no:
+        return 45, "Male", "", "Please enter an NHS Number."
+    try:
+        patient = agent.lookup_patient(nhs_no)
+        pmh_context = f"Registered GP: {patient.gp_practice_name}"
+        status_msg = f"✅ Verified: {patient.full_name}"
+        return patient.age, patient.gender, pmh_context, status_msg
+    except Exception as e:
+        return 45, "Male", "", f"❌ Lookup failed: {str(e)}"
 
-with gr.Blocks(theme=gr.themes.Soft()) as demo:
+def gradio_predict(complaint, age, gender, pmh, hr, bp, spo2, rr, temp, avpu):
+    return agent.get_response(complaint, hr, bp, spo2, temp, rr, avpu, age, gender, pmh)
+
+with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", neutral_hue="slate")) as demo:
     gr.Markdown("""
-    # 🩺 NurseSim AI: Emergency Triage Simulator
+    # 🏥 NurseSim AI: Emergency Triage Simulator
     **An AI agent fine-tuned for the Manchester Triage System (MTS).**
-    *Developed for the OpenEnv Challenge by NurseCitizenDeveloper.*
     
     > ⚡ **Hybrid Mode**: Serving both Gradio UI and A2A API (AgentBeats)
     """)
     
     with gr.Row():
-        with gr.Column():
-            complaint = gr.Textbox(label="Chief Complaint", placeholder="e.g., Shortness of breath...")
+        with gr.Column(scale=1):
+            gr.Markdown("### 1. Patient Demographics")
             with gr.Row():
-                hr = gr.Number(label="Heart Rate", value=80)
-                bp = gr.Textbox(label="Blood Pressure", placeholder="e.g., 120/80")
+                nhs_number = gr.Textbox(label="NHS Number", placeholder="e.g. 9000000009", scale=2)
+                lookup_btn = gr.Button("🔍 Lookup", variant="secondary", scale=1)
+            lookup_status = gr.Markdown("")
+            
+            age = gr.Number(label="Age", value=45)
+            gender = gr.Radio(["Male", "Female"], label="Gender", value="Male")
+            pmh = gr.Textbox(label="Medical History (PMH)", placeholder="e.g., Hypertension, Diabetes, Asthma", lines=2)
+            
+            gr.Markdown("### 2. Presentation")
+            complaint = gr.Textbox(label="Chief Complaint", placeholder="e.g., Crushing chest pain radiating to jaw", lines=2)
+            
+        with gr.Column(scale=1):
+            gr.Markdown("### 3. Vital Signs")
             with gr.Row():
+                hr = gr.Number(label="HR (bpm)", value=80)
+                rr = gr.Number(label="RR (breaths/min)", value=16)
+            with gr.Row():
+                bp = gr.Textbox(label="BP (mmHg)", value="120/80")
                 spo2 = gr.Slider(label="SpO2 (%)", minimum=50, maximum=100, value=98)
-                temp = gr.Number(label="Temperature (C)", value=37.0)
+            with gr.Row():
+                temp = gr.Number(label="Temp (C)", value=37.0)
+                avpu = gr.Dropdown(["A", "V", "P", "U"], label="AVPU", value="A")
             
-            submit_btn = gr.Button("Assess Patient", variant="primary")
+            submit_btn = gr.Button("🚨 Assess Patient", variant="primary", size="lg")
             
-        with gr.Column():
-            output_text = gr.Textbox(label="AI Triage Assessment", lines=10)
-            gr.Markdown("### ⚠️ Research Prototype - Not for Clinical Use")
+    with gr.Row():
+        output_text = gr.Textbox(label="AI Triage Assessment", lines=8, show_copy_button=True)
+        gr.Markdown("""
+        ### ⚠️ Safety Disclaimer
+        This system is a **research prototype**. It is **NOT** a certified medical device.
+        """)
 
-    submit_btn.click(gradio_predict, inputs=[complaint, hr, bp, spo2, temp], outputs=output_text)
+    lookup_btn.click(
+        fn=lookup_patient_ui,
+        inputs=[nhs_number],
+        outputs=[age, gender, pmh, lookup_status]
+    )
+
+    submit_btn.click(
+        fn=gradio_predict,
+        inputs=[complaint, age, gender, pmh, hr, bp, spo2, rr, temp, avpu],
+        outputs=output_text
+    )
     
     gr.Examples(
         examples=[
-            ["Crushing chest pain and nausea", 110, "90/60", 94, 37.2],
-            ["Twisted ankle at football", 75, "125/85", 99, 36.8],
+            ["Crushing chest pain and nausea", 72, "Male", "HTN, High Cholesterol", 110, "90/60", 94, 24, 37.2, "A"],
+            ["Twisted ankle at football", 22, "Male", "None", 75, "125/85", 99, 14, 36.8, "A"],
         ],
-        inputs=[complaint, hr, bp, spo2, temp]
+        inputs=[complaint, age, gender, pmh, hr, bp, spo2, rr, temp, avpu]
     )
 
 # Mount Gradio app to FastAPI at root
