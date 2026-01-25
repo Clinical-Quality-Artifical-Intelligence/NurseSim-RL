@@ -153,7 +153,7 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", neutral_hue="slate")) as
             submit_btn = gr.Button("🚨 Assess Patient", variant="primary", size="lg")
             
     with gr.Row():
-        output_text = gr.Textbox(label="AI Triage Assessment", lines=8, show_copy_button=True)
+        output_text = gr.Textbox(label="AI Triage Assessment", lines=8)
         
     gr.Markdown("""
     ### ⚠️ Safety Disclaimer
