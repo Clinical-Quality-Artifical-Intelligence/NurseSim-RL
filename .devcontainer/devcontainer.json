@@ -1,0 +1,43 @@
+{
+    "name": "NurseSim-Triage Dev Environment",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.formatting.provider": "black",
+                "editor.formatOnSave": true
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "KevinRose.vsc-python-indent",
+                "njpwerner.autodocstring",
+                "donjayamanne.githistory"
+            ]
+        }
+    },
+    "forwardPorts": [
+        7860,
+        8080
+    ],
+    "portsAttributes": {
+        "7860": {
+            "label": "Gradio UI",
+            "onAutoForward": "notify"
+        },
+        "8080": {
+            "label": "AgentBeats API",
+            "onAutoForward": "silent"
+        }
+    },
+    "postCreateCommand": "pip install --user -r requirements.txt",
+    "remoteUser": "vscode",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    }
+}
