@@ -18,8 +18,12 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any
 from pydantic import BaseModel
+from typing import Optional
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from peft import PeftModel
+
+# PDS Client for NHS patient lookup
+from nursesim_rl.pds_client import PDSClient, PDSEnvironment, PatientDemographics
 
 # ==========================================
 # Data Models
@@ -34,6 +38,9 @@ class Vitals(BaseModel):
 class TaskInput(BaseModel):
     complaint: str
     vitals: Vitals
+    nhs_number: Optional[str] = None  # If provided, fetch demographics from PDS
+    age: Optional[int] = None
+    gender: Optional[str] = None
 
 # ==========================================
 # Agent Core Logic
@@ -49,6 +56,9 @@ class NurseSimTriageAgent:
         self.model = None
         self.tokenizer = None
         self.HF_TOKEN = os.environ.get("HF_TOKEN")
+        
+        # Initialize PDS client for NHS patient lookup (sandbox mode)
+        self.pds_client = PDSClient(environment=PDSEnvironment.SANDBOX)
         
         if not self.HF_TOKEN:
             print("WARNING: HF_TOKEN not set. Model loading will fail if authentication is required.")
@@ -128,7 +138,7 @@ Vitals: HR {hr}, BP {bp}, SpO2 {spo2}%, Temp {temp}C.
         return response
 
     def process_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
-        """Process an API task."""
+        """Process an API task, optionally fetching patient demographics from PDS."""
         if self.model is None:
             return {
                 "error": "ModelStillLoading", 
@@ -138,6 +148,16 @@ Vitals: HR {hr}, BP {bp}, SpO2 {spo2}%, Temp {temp}C.
         try:
             complaint = task.get("complaint", "")
             vitals = task.get("vitals", {})
+            nhs_number = task.get("nhs_number")
+            
+            # If NHS number provided, enrich with PDS data
+            patient_info = None
+            if nhs_number:
+                try:
+                    patient_info = self.lookup_patient(nhs_number)
+                except Exception as e:
+                    print(f"PDS lookup failed: {e}")
+            
             response = self.get_response(
                 complaint, 
                 vitals.get("heart_rate", 80),
@@ -146,14 +166,38 @@ Vitals: HR {hr}, BP {bp}, SpO2 {spo2}%, Temp {temp}C.
                 vitals.get("temperature", 37.0)
             )
             
-            return {
+            result = {
                 "triage_category": self._extract_triage_category(response),
                 "assessment": response,
                 "recommended_action": self._extract_recommended_action(response)
             }
             
+            # Include patient info if retrieved
+            if patient_info:
+                result["patient"] = {
+                    "nhs_number": patient_info.nhs_number,
+                    "name": patient_info.full_name,
+                    "age": patient_info.age,
+                    "gender": patient_info.gender,
+                    "gp_practice": patient_info.gp_practice_name,
+                }
+            
+            return result
+            
         except Exception as e:
             return {"error": str(e), "triage_category": "Error"}
+    
+    def lookup_patient(self, nhs_number: str) -> PatientDemographics:
+        """
+        Look up patient demographics from NHS PDS.
+        
+        Args:
+            nhs_number: 10-digit NHS number
+            
+        Returns:
+            PatientDemographics object with patient details
+        """
+        return self.pds_client.lookup_patient_sync(nhs_number)
     
     def _extract_triage_category(self, response: str) -> str:
         response_lower = response.lower()
@@ -221,6 +265,28 @@ async def process_task(task: TaskInput):
     if "error" in result and result.get("message") == "ModelStillLoading":
         raise HTTPException(status_code=503, detail=result["message"])
     return result
+
+class PatientLookupRequest(BaseModel):
+    nhs_number: str
+
+@app.post("/lookup-patient")
+async def api_lookup_patient(request: PatientLookupRequest):
+    """Direct endpoint to lookup patient details from NHS PDS."""
+    try:
+        patient = agent.lookup_patient(request.nhs_number)
+        return {
+            "nhs_number": patient.nhs_number,
+            "full_name": patient.full_name,
+            "date_of_birth": patient.date_of_birth,
+            "age": patient.age,
+            "gender": patient.gender,
+            "address": patient.address,
+            "gp_practice": patient.gp_practice_name
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # ==========================================
 # Gradio UI Integration

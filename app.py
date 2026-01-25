@@ -4,6 +4,7 @@ import torch
 import os
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
+from nursesim_rl.pds_client import lookup_patient_sync
 
 # Get HF token from environment (set as a Space secret)
 HF_TOKEN = os.environ.get("HF_TOKEN")
@@ -32,6 +33,20 @@ def load_model():
         model = PeftModel.from_pretrained(model, adapter_id, token=HF_TOKEN)
         model.eval()
     return model, tokenizer
+
+def lookup_patient_ui(nhs_no):
+    """Gradio handler for PDS lookup."""
+    if not nhs_no:
+        return 45, "Male", "", "Please enter an NHS Number."
+        
+    try:
+        patient = lookup_patient_sync(nhs_no)
+        # Format PMH with GP info as context
+        pmh_context = f"Registered GP: {patient.gp_practice_name}"
+        status_msg = f"✅ Verified: {patient.full_name}"
+        return patient.age, patient.gender, pmh_context, status_msg
+    except Exception as e:
+        return 45, "Male", "", f"❌ Lookup failed: {str(e)}"
 
 def format_prompt(complaint, hr, bp, spo2, temp, rr, avpu, age, gender, pmh):
     # Construct History Dictionary (Critical for Model Accuracy)
@@ -109,6 +124,13 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", neutral_hue="slate")) as
     with gr.Row():
         with gr.Column(scale=1):
             gr.Markdown("### 1. Patient Demographics")
+            
+            with gr.Row():
+                nhs_number = gr.Textbox(label="NHS Number", placeholder="e.g. 9000000009", scale=2)
+                lookup_btn = gr.Button("🔍 Lookup", variant="secondary", scale=1)
+            
+            lookup_status = gr.Markdown("")
+            
             age = gr.Number(label="Age", value=45)
             gender = gr.Radio(["Male", "Female"], label="Gender", value="Male")
             pmh = gr.Textbox(label="Medical History (PMH)", placeholder="e.g., Hypertension, Diabetes, Asthma", lines=2)
@@ -138,6 +160,13 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", neutral_hue="slate")) as
     This system is a **research prototype** developed for the OpenEnv Challenge. 
     It is **NOT** a certified medical device and should not be used for real clinical decision-making.
     """)
+
+    # Wire up lookup button
+    lookup_btn.click(
+        fn=lookup_patient_ui,
+        inputs=[nhs_number],
+        outputs=[age, gender, pmh, lookup_status]
+    )
 
     submit_btn.click(
         fn=triage_patient,
