@@ -240,6 +240,9 @@ class PDSClient:
             security_codes = [s.get("code") for s in meta["security"]]
             is_restricted = "R" in security_codes
         
+        if is_restricted:
+            raise ValueError(f"Access to restricted patient record denied for NHS Number: {nhs_number}")
+
         # Check for deceased
         is_deceased = data.get("deceasedBoolean", False) or \
                       data.get("deceasedDateTime") is not None
