@@ -239,6 +239,9 @@ class PDSClient:
         if "security" in meta:
             security_codes = [s.get("code") for s in meta["security"]]
             is_restricted = "R" in security_codes
+
+        if is_restricted:
+            raise ValueError(f"Access to this patient record ({nhs_number}) is RESTRICTED. Please contact the Caldicott Guardian.")
         
         # Check for deceased
         is_deceased = data.get("deceasedBoolean", False) or \
