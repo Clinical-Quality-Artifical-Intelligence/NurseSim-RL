@@ -8,7 +8,6 @@ Tests the agent's conformance to the Agent-to-Agent (A2A) protocol specification
 import json
 import subprocess
 import time
-import requests
 from pathlib import Path
 
 
