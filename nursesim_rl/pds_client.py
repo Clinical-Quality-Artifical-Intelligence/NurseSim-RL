@@ -27,6 +27,11 @@ class PDSEnvironment(Enum):
     PRODUCTION = "prod"
 
 
+class RestrictedPatientError(ValueError):
+    """Raised when a patient record is restricted (Code R) and access is denied."""
+    pass
+
+
 @dataclass
 class PatientDemographics:
     """Normalized patient demographics from PDS."""
@@ -240,6 +245,9 @@ class PDSClient:
             security_codes = [s.get("code") for s in meta["security"]]
             is_restricted = "R" in security_codes
         
+        if is_restricted:
+            raise RestrictedPatientError(f"Patient record {nhs_number} is restricted. Access denied.")
+
         # Check for deceased
         is_deceased = data.get("deceasedBoolean", False) or \
                       data.get("deceasedDateTime") is not None
