@@ -23,7 +23,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from peft import PeftModel
 
 # PDS Client for NHS patient lookup
-from nursesim_rl.pds_client import PDSClient, PDSEnvironment, PatientDemographics
+from nursesim_rl.pds_client import PDSClient, PDSEnvironment, PatientDemographics, RestrictedPatientError
 
 # ==========================================
 # Data Models
@@ -190,6 +190,9 @@ You are an expert A&E Triage Nurse using the Manchester Triage System. Assess th
             if nhs_number:
                 try:
                     patient_info = self.lookup_patient(nhs_number)
+                except RestrictedPatientError as e:
+                    print(f"SECURITY ALERT: {e}")
+                    # Explicitly do NOT set patient_info so data is not leaked
                 except Exception as e:
                     print(f"PDS lookup failed: {e}")
             
@@ -318,6 +321,8 @@ async def api_lookup_patient(request: PatientLookupRequest):
             "address": patient.address,
             "gp_practice": patient.gp_practice_name
         }
+    except RestrictedPatientError as e:
+        raise HTTPException(status_code=403, detail="Access denied: Restricted record")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
@@ -336,6 +341,8 @@ def lookup_patient_ui(nhs_no):
         pmh_context = f"Registered GP: {patient.gp_practice_name}"
         status_msg = f"✅ Verified: {patient.full_name}"
         return patient.age, patient.gender, pmh_context, status_msg
+    except RestrictedPatientError:
+        return 45, "Male", "", "❌ ACCESS DENIED: Restricted Record"
     except Exception as e:
         return 45, "Male", "", f"❌ Lookup failed: {str(e)}"
 
