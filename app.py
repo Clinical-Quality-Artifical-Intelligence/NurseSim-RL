@@ -4,7 +4,7 @@ import torch
 import os
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
-from nursesim_rl.pds_client import lookup_patient_sync
+from nursesim_rl.pds_client import lookup_patient_sync, RestrictedPatientError
 
 # Get HF token from environment (set as a Space secret)
 HF_TOKEN = os.environ.get("HF_TOKEN")
@@ -45,6 +45,8 @@ def lookup_patient_ui(nhs_no):
         pmh_context = f"Registered GP: {patient.gp_practice_name}"
         status_msg = f"✅ Verified: {patient.full_name}"
         return patient.age, patient.gender, pmh_context, status_msg
+    except RestrictedPatientError:
+        return 45, "Male", "", "🚫 ACCESS DENIED: Restricted Record"
     except Exception as e:
         return 45, "Male", "", f"❌ Lookup failed: {str(e)}"
 

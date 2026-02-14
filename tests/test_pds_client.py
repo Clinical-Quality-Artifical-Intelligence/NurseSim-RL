@@ -11,7 +11,9 @@ from nursesim_rl.pds_client import (
     PatientDemographics,
     lookup_patient_sync,
     SANDBOX_TEST_PATIENTS,
+    RestrictedPatientError,
 )
+from unittest.mock import MagicMock, patch
 
 
 class TestNHSNumberValidation:
@@ -127,6 +129,87 @@ class TestPatientDemographicsParsing:
         if patient.given_name and patient.family_name:
             expected_full = f"{patient.given_name} {patient.family_name}"
             assert patient.full_name == expected_full
+
+
+class TestSecurity:
+    """Security tests for PDS Client."""
+
+    def test_restricted_patient_access_denied(self):
+        """Test that accessing a restricted patient raises RestrictedPatientError."""
+        client = PDSClient(environment=PDSEnvironment.SANDBOX)
+
+        # Mock response data for a restricted patient
+        mock_response_data = {
+            "resourceType": "Patient",
+            "id": "9000000017",
+            "meta": {
+                "security": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                        "code": "R",
+                        "display": "restricted"
+                    }
+                ]
+            },
+            "name": [
+                {
+                    "use": "official",
+                    "family": "Smythe",
+                    "given": ["Jayne"]
+                }
+            ],
+            "gender": "female",
+            "birthDate": "1990-01-01"
+        }
+
+        # Patch httpx.Client.get (since lookup_patient_sync uses Client, not AsyncClient)
+        # Or patch AsyncClient.get if we test lookup_patient
+
+        # Let's test the async version since it's used in the app
+        with patch('httpx.AsyncClient.get') as mock_get:
+            mock_response = MagicMock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = mock_response_data
+            mock_response.raise_for_status = MagicMock()
+            mock_get.return_value = mock_response
+
+            import asyncio
+
+            async def run_test():
+                with pytest.raises(RestrictedPatientError, match="Access to patient record 9000000017 is RESTRICTED"):
+                    await client.lookup_patient("9000000017")
+
+            asyncio.run(run_test())
+
+    def test_restricted_patient_sync_access_denied(self):
+        """Test that accessing a restricted patient raises RestrictedPatientError (Sync)."""
+        client = PDSClient(environment=PDSEnvironment.SANDBOX)
+
+        # Mock response data for a restricted patient
+        mock_response_data = {
+            "resourceType": "Patient",
+            "id": "9000000017",
+            "meta": {
+                "security": [
+                    {
+                        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                        "code": "R",
+                        "display": "restricted"
+                    }
+                ]
+            },
+            "name": [{"family": "Smythe", "given": ["Jayne"]}]
+        }
+
+        with patch('httpx.Client.get') as mock_get:
+            mock_response = MagicMock()
+            mock_response.status_code = 200
+            mock_response.json.return_value = mock_response_data
+            mock_response.raise_for_status = MagicMock()
+            mock_get.return_value = mock_response
+
+            with pytest.raises(RestrictedPatientError, match="Access to patient record 9000000017 is RESTRICTED"):
+                client.lookup_patient_sync("9000000017")
 
 
 # Integration test marker for tests requiring network
