@@ -248,6 +248,9 @@ class PDSClient:
         if is_restricted:
             raise RestrictedPatientError(f"Access to patient record {nhs_number} is RESTRICTED (Code 'R'). Access Denied.")
         
+        if is_restricted:
+            raise ValueError(f"Access to restricted patient record denied for NHS Number: {nhs_number}")
+
         # Check for deceased
         is_deceased = data.get("deceasedBoolean", False) or \
                       data.get("deceasedDateTime") is not None
