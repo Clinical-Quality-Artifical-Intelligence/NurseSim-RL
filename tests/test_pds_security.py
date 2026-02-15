@@ -37,11 +37,12 @@ class TestPDSSecurity(unittest.TestCase):
         mock_client_instance = mock_client_cls.return_value
         mock_client_instance.__enter__.return_value.get.return_value = mock_response
 
-        # This should now fail with ValueError
+        # This should now fail with ValueError (RestrictedPatientError inherits from ValueError)
         with self.assertRaises(ValueError) as cm:
             self.client.lookup_patient_sync("9000000017")
 
-        self.assertIn("Access to restricted patient record denied", str(cm.exception))
+        # Updated to match the actual error message raised by pds_client.py
+        self.assertIn("Access to patient record 9000000017 is RESTRICTED", str(cm.exception))
         print("Test passed: Restricted patient record access denied (SECURITY FIX VERIFIED)")
 
 if __name__ == '__main__':

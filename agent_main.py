@@ -13,7 +13,8 @@ import uvicorn
 import asyncio
 import gradio as gr
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Depends, status, Security
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any
@@ -279,6 +280,39 @@ app.add_middleware(
 )
 
 # ==========================================
+# Security Dependency
+# ==========================================
+
+security_scheme = HTTPBearer()
+
+def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(security_scheme)):
+    """
+    Verify the Bearer token against API_KEY or HF_TOKEN.
+    """
+    token = credentials.credentials
+    api_key = os.environ.get("API_KEY")
+    hf_token = os.environ.get("HF_TOKEN")
+
+    valid_keys = [k for k in [api_key, hf_token] if k]
+
+    if not valid_keys:
+        # Fail closed if no keys are configured
+        print("WARNING: No API_KEY or HF_TOKEN set. Denying all requests.")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Server configuration error: Authentication required but no keys set.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    if token not in valid_keys:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid authentication credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    return token
+
+# ==========================================
 # API Endpoints
 # ==========================================
 
@@ -304,9 +338,9 @@ async def process_task(task: TaskInput):
 class PatientLookupRequest(BaseModel):
     nhs_number: str
 
-@app.post("/lookup-patient")
+@app.post("/lookup-patient", dependencies=[Depends(verify_api_key)])
 async def api_lookup_patient(request: PatientLookupRequest):
-    """Direct endpoint to lookup patient details from NHS PDS."""
+    """Direct endpoint to lookup patient details from NHS PDS. Requires authentication."""
     try:
         patient = agent.lookup_patient(request.nhs_number)
         return {
