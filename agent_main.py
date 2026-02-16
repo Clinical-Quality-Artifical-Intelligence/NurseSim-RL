@@ -13,7 +13,8 @@ import uvicorn
 import asyncio
 import gradio as gr
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, Depends, Security, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any
@@ -279,6 +280,41 @@ app.add_middleware(
 )
 
 # ==========================================
+# Security
+# ==========================================
+
+security = HTTPBearer()
+
+async def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(security)):
+    """
+    Verify API key or HF token from Authorization header.
+    Fail-closed: If no keys are configured, all access is denied.
+    """
+    api_key = os.environ.get("API_KEY")
+    hf_token = os.environ.get("HF_TOKEN")
+
+    if not api_key and not hf_token:
+        # System locked down if no keys configured
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="System misconfigured: No authentication keys set."
+        )
+
+    token = credentials.credentials
+
+    # Check against available keys
+    if api_key and token == api_key:
+        return token
+    if hf_token and token == hf_token:
+        return token
+
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid authentication credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+# ==========================================
 # API Endpoints
 # ==========================================
 
@@ -294,7 +330,7 @@ async def get_agent_card():
             return json.load(f)
     raise HTTPException(status_code=404, detail="Agent card not found")
 
-@app.post("/process-task")
+@app.post("/process-task", dependencies=[Depends(verify_api_key)])
 async def process_task(task: TaskInput):
     result = agent.process_task(task.dict())
     if "error" in result and result.get("message") == "ModelStillLoading":
@@ -304,7 +340,7 @@ async def process_task(task: TaskInput):
 class PatientLookupRequest(BaseModel):
     nhs_number: str
 
-@app.post("/lookup-patient")
+@app.post("/lookup-patient", dependencies=[Depends(verify_api_key)])
 async def api_lookup_patient(request: PatientLookupRequest):
     """Direct endpoint to lookup patient details from NHS PDS."""
     try:
