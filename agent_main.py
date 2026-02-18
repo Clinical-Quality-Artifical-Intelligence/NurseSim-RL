@@ -447,7 +447,21 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", neutral_hue="slate")) as
     )
 
 # Mount Gradio app to FastAPI at root
-app = gr.mount_gradio_app(app, demo, path="/")
+# ----------------------------------------------------------------------
+# SENTINEL SECURITY FIX: Enforce authentication on Gradio UI
+# ----------------------------------------------------------------------
+gradio_auth = None
+api_key = os.environ.get("API_KEY")
+hf_token = os.environ.get("HF_TOKEN")
+
+if api_key:
+    gradio_auth = ("admin", api_key)
+elif hf_token:
+    gradio_auth = ("admin", hf_token)
+else:
+    print("⚠️ WARNING: No API_KEY or HF_TOKEN found. Gradio UI is unsecured!")
+
+app = gr.mount_gradio_app(app, demo, path="/", auth=gradio_auth)
 
 if __name__ == "__main__":
     print("Starting Hybrid Server on port 7860...")
