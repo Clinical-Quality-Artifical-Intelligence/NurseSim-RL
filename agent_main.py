@@ -8,6 +8,7 @@ into a single FastAPI application listening on port 7860.
 
 import os
 import json
+import secrets
 import torch
 import uvicorn
 import asyncio
@@ -303,9 +304,9 @@ async def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(se
     token = credentials.credentials
 
     # Check against available keys
-    if api_key and token == api_key:
+    if api_key and secrets.compare_digest(token, api_key):
         return token
-    if hf_token and token == hf_token:
+    if hf_token and secrets.compare_digest(token, hf_token):
         return token
 
     raise HTTPException(
