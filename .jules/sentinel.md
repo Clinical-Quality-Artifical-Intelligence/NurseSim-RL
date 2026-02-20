@@ -7,3 +7,8 @@
 **Vulnerability:** The `/lookup-patient` and `/process-task` endpoints were exposed without authentication, allowing potential access to simulated patient data and compute resources.
 **Learning:** Prototype code often neglects authentication for "ease of testing", but this creates immediate debt. Verifying security controls in a dependency-constrained CI environment (missing FastAPI/Torch) required mocking the framework itself to inspect route dependencies.
 **Prevention:** enforce `HTTPBearer` authentication on all endpoints by default using a reusable dependency. Use "fail-closed" logic for missing keys. Verify security controls by inspecting the application's route configuration in unit tests, even if the runtime environment is limited.
+
+## 2025-05-27 - Timing Attack on API Key Verification
+**Vulnerability:** The API key verification logic used standard string comparison (`==`) for checking `API_KEY` and `HF_TOKEN`. This is vulnerable to timing attacks, where an attacker can infer the key character by character based on the time it takes for the comparison to fail.
+**Learning:** Even in high-level languages like Python, string comparison optimizations (short-circuiting) can leak information about secrets. Security-critical comparisons must always be constant-time.
+**Prevention:** Use `secrets.compare_digest()` for all secret comparisons. This function is designed to run in constant time regardless of the input, preventing timing side-channel attacks.

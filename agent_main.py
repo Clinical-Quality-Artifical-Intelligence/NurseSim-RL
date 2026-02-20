@@ -11,6 +11,7 @@ import json
 import torch
 import uvicorn
 import asyncio
+import secrets
 import gradio as gr
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Request, Depends, Security, status
@@ -303,9 +304,9 @@ async def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(se
     token = credentials.credentials
 
     # Check against available keys
-    if api_key and token == api_key:
+    if api_key and secrets.compare_digest(token, api_key):
         return token
-    if hf_token and token == hf_token:
+    if hf_token and secrets.compare_digest(token, hf_token):
         return token
 
     raise HTTPException(
