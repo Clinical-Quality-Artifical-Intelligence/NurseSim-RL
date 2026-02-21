@@ -315,6 +315,27 @@ async def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(se
         headers={"WWW-Authenticate": "Bearer"},
     )
 
+def get_gradio_auth():
+    """
+    Get authentication credentials for Gradio UI.
+    Mirroring the API security: supports both API_KEY and HF_TOKEN.
+    """
+    auth_creds = []
+    api_key = os.environ.get("API_KEY")
+    hf_token = os.environ.get("HF_TOKEN")
+
+    if api_key:
+        auth_creds.append(("admin", api_key))
+    if hf_token:
+        auth_creds.append(("admin", hf_token))
+
+    if not auth_creds:
+        random_key = secrets.token_urlsafe(16)
+        print(f"WARNING: No authentication keys set. Gradio UI locked with random key: {random_key}")
+        auth_creds.append(("admin", random_key))
+
+    return auth_creds
+
 # ==========================================
 # API Endpoints
 # ==========================================
@@ -448,7 +469,8 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", neutral_hue="slate")) as
     )
 
 # Mount Gradio app to FastAPI at root
-app = gr.mount_gradio_app(app, demo, path="/")
+# Secure the UI with the same credentials as the API
+app = gr.mount_gradio_app(app, demo, path="/", auth=get_gradio_auth())
 
 if __name__ == "__main__":
     print("Starting Hybrid Server on port 7860...")

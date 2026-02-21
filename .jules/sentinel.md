@@ -12,3 +12,8 @@
 **Vulnerability:** The API key verification logic used standard string comparison (`==`) for checking `API_KEY` and `HF_TOKEN`. This is vulnerable to timing attacks, where an attacker can infer the key character by character based on the time it takes for the comparison to fail.
 **Learning:** Even in high-level languages like Python, string comparison optimizations (short-circuiting) can leak information about secrets. Security-critical comparisons must always be constant-time.
 **Prevention:** Use `secrets.compare_digest()` for all secret comparisons. This function is designed to run in constant time regardless of the input, preventing timing side-channel attacks.
+
+## 2025-05-28 - Unauthenticated Gradio UI Exposure
+**Vulnerability:** The Gradio user interfaces mounted in `agent_main.py` and `app.py` were exposed without authentication, bypassing the API security controls and allowing public access to PDS lookup and model inference.
+**Learning:** Securing API endpoints (FastAPI dependencies) does not automatically secure mounted sub-applications or UIs. Framework integration points (like `gr.mount_gradio_app`) often have their own separate security configurations that must be explicitly enabled.
+**Prevention:** Explicitly configure authentication for all exposed interfaces. Implement a "Fail-Secure" default: if no authentication keys are provided in the environment, the application should lock itself down (e.g., by generating a random unreachable password) rather than defaulting to open access.
