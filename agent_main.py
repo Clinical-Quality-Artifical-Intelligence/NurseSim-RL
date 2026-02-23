@@ -9,6 +9,7 @@ into a single FastAPI application listening on port 7860.
 import os
 import json
 import torch
+import logging
 import uvicorn
 import asyncio
 import secrets
@@ -222,7 +223,8 @@ You are an expert A&E Triage Nurse using the Manchester Triage System. Assess th
             return result
             
         except Exception as e:
-            return {"error": str(e), "triage_category": "Error"}
+            logger.exception("Error processing task")
+            return {"error": "Internal Processing Error", "triage_category": "Error"}
     
     def lookup_patient(self, nhs_number: str) -> PatientDemographics:
         """
@@ -260,6 +262,13 @@ You are an expert A&E Triage Nurse using the Manchester Triage System. Assess th
 # ==========================================
 # Application Setup
 # ==========================================
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 agent = NurseSimTriageAgent()
 
@@ -377,11 +386,13 @@ async def api_lookup_patient(request: PatientLookupRequest):
             "gp_practice": patient.gp_practice_name
         }
     except RestrictedPatientError as e:
+        logger.warning(f"Access denied for restricted patient: {request.nhs_number}")
         raise HTTPException(status_code=403, detail="🚫 ACCESS DENIED: Restricted Patient Record")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Unexpected error during patient lookup")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 # ==========================================
 # Gradio UI Integration
