@@ -3,6 +3,10 @@
 **Learning:** Checking for a security flag is insufficient if it doesn't interrupt the data flow. The original implementation parsed the flag but continued processing, relying on downstream consumers (which didn't exist) to handle it.
 **Prevention:** Implement "fail-secure" logic at the data access layer. If a record is restricted, raise a specific exception immediately rather than returning the data object with a flag.
 
+## 2025-05-24 - Unauthenticated PII API Endpoint
+**Vulnerability:** The `/lookup-patient` endpoint was exposed without any authentication, allowing anyone to retrieve full patient demographics (PII) by NHS number.
+**Learning:** Default "open" configurations for demo environments (like Hugging Face Spaces) can easily leak into production-like APIs. The assumption that `HF_TOKEN` secured the model led to overlooking API security.
+**Prevention:** Always apply authentication middleware (e.g., `Depends(verify_api_key)`) to any endpoint returning PII, regardless of environment (sandbox vs. prod). Use fail-closed logic if keys are missing.
 ## 2024-05-24 - Unauthenticated API Endpoints in Prototype
 **Vulnerability:** The `/lookup-patient` and `/process-task` endpoints were exposed without authentication, allowing potential access to simulated patient data and compute resources.
 **Learning:** Prototype code often neglects authentication for "ease of testing", but this creates immediate debt. Verifying security controls in a dependency-constrained CI environment (missing FastAPI/Torch) required mocking the framework itself to inspect route dependencies.

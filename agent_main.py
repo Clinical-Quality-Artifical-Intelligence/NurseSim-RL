@@ -374,7 +374,7 @@ class PatientLookupRequest(BaseModel):
 
 @app.post("/lookup-patient", dependencies=[Depends(verify_api_key)])
 async def api_lookup_patient(request: PatientLookupRequest):
-    """Direct endpoint to lookup patient details from NHS PDS."""
+    """Direct endpoint to lookup patient details from NHS PDS. Requires authentication."""
     try:
         patient = agent.lookup_patient(request.nhs_number)
         return {
