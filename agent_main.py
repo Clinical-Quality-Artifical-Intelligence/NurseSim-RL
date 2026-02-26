@@ -194,6 +194,9 @@ You are an expert A&E Triage Nurse using the Manchester Triage System. Assess th
             if nhs_number:
                 try:
                     patient_info = self.lookup_patient(nhs_number)
+                except RestrictedPatientError as e:
+                    print(f"SECURITY ALERT: {e}")
+                    # Explicitly do NOT set patient_info so data is not leaked
                 except Exception as e:
                     print(f"PDS lookup failed: {e}")
             

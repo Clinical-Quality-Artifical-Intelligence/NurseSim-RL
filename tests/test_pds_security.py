@@ -16,6 +16,7 @@ class TestPDSSecurity(unittest.TestCase):
             "meta": {
                 "security": [
                     {
+                        "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
                         "code": "R",
                         "display": "restricted"
                     }

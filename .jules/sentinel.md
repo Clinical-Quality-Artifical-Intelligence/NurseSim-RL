@@ -1,3 +1,9 @@
+# Sentinel Journal
+
+## 2026-02-12 - Restricted Patient Data Leakage
+**Vulnerability:** The PDS Client correctly identified restricted records (flagged with 'R' in `meta.security`) but returned the full sensitive data anyway.
+**Learning:** Checking a flag (`is_restricted`) is not enough; the application must enforce the restriction by raising an exception or redacting the data immediately.
+**Prevention:** Implemented `RestrictedPatientError` and raised it immediately upon detecting the restricted flag in the data parsing layer (`_parse_patient_response`), preventing data from reaching the UI or API consumers.
 ## 2024-05-23 - Restricted Patient Data Exposure
 **Vulnerability:** The PDS client was retrieving and returning full demographic details for patients flagged as "Restricted" (security code 'R') in the NHS PDS response. While the code identified the flag, it did not block access.
 **Learning:** Checking for a security flag is insufficient if it doesn't interrupt the data flow. The original implementation parsed the flag but continued processing, relying on downstream consumers (which didn't exist) to handle it.
