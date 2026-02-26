@@ -8,6 +8,7 @@ into a single FastAPI application listening on port 7860.
 
 import os
 import json
+import secrets
 import torch
 import logging
 import uvicorn

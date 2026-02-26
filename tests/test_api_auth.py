@@ -120,36 +120,45 @@ class TestAgentAuth(unittest.TestCase):
         mock_creds = MagicMock()
         mock_creds.credentials = "secret_token"
 
-        # CASE 1: No env vars set -> 403
-        with patch.dict(os.environ, {}, clear=True):
-            with self.assertRaises(Exception) as cm:
-                await verify_api_key(mock_creds)
-            # We mocked HTTPException as Exception, so we check if 403 was passed (status_code arg)
-            # Since mock_fastapi.HTTPException is just Exception, it doesn't store status_code easily unless we check how it was initialized.
-            # But wait, in agent_main: raise HTTPException(status_code=..., detail=...)
-            # So the Exception args will contain status_code and detail if passed positionally,
-            # or we can inspect the mock if we used a Mock for HTTPException.
-            # Here checking the message is tricky because we used plain Exception.
-            # Let's assume it raises Exception. Ideally verify the message "System misconfigured".
-            # The exception args will be kwargs if we didn't mock init.
-            # Let's rely on side effect or just trust it raises.
-            pass
+        # Check that secrets.compare_digest is used
+        with patch("agent_main.secrets.compare_digest", side_effect=lambda a, b: a == b) as mock_compare_digest:
 
-        # CASE 2: API_KEY set, correct token -> Returns token
-        with patch.dict(os.environ, {"API_KEY": "secret_token"}, clear=True):
-            result = await verify_api_key(mock_creds)
-            self.assertEqual(result, "secret_token")
+            # CASE 1: No env vars set -> 403
+            with patch.dict(os.environ, {}, clear=True):
+                with self.assertRaises(Exception) as cm:
+                    await verify_api_key(mock_creds)
+                # We mocked HTTPException as Exception, so we check if 403 was passed (status_code arg)
+                # Since mock_fastapi.HTTPException is just Exception, it doesn't store status_code easily unless we check how it was initialized.
+                # But wait, in agent_main: raise HTTPException(status_code=..., detail=...)
+                # So the Exception args will contain status_code and detail if passed positionally,
+                # or we can inspect the mock if we used a Mock for HTTPException.
+                # Here checking the message is tricky because we used plain Exception.
+                # Let's assume it raises Exception. Ideally verify the message "System misconfigured".
+                # The exception args will be kwargs if we didn't mock init.
+                # Let's rely on side effect or just trust it raises.
+                pass
 
-        # CASE 3: HF_TOKEN set, correct token -> Returns token
-        with patch.dict(os.environ, {"HF_TOKEN": "secret_token"}, clear=True):
-            result = await verify_api_key(mock_creds)
-            self.assertEqual(result, "secret_token")
+            # CASE 2: API_KEY set, correct token -> Returns token
+            mock_compare_digest.reset_mock()
+            with patch.dict(os.environ, {"API_KEY": "secret_token"}, clear=True):
+                result = await verify_api_key(mock_creds)
+                self.assertEqual(result, "secret_token")
+                self.assertTrue(mock_compare_digest.called, "secrets.compare_digest not called for API_KEY")
 
-        # CASE 4: Token mismatch -> 401
-        mock_creds.credentials = "wrong_token"
-        with patch.dict(os.environ, {"API_KEY": "secret_token"}, clear=True):
-            with self.assertRaises(Exception):
-                await verify_api_key(mock_creds)
+            # CASE 3: HF_TOKEN set, correct token -> Returns token
+            mock_compare_digest.reset_mock()
+            with patch.dict(os.environ, {"HF_TOKEN": "secret_token"}, clear=True):
+                result = await verify_api_key(mock_creds)
+                self.assertEqual(result, "secret_token")
+                self.assertTrue(mock_compare_digest.called, "secrets.compare_digest not called for HF_TOKEN")
+
+            # CASE 4: Token mismatch -> 401
+            mock_creds.credentials = "wrong_token"
+            mock_compare_digest.reset_mock()
+            with patch.dict(os.environ, {"API_KEY": "secret_token"}, clear=True):
+                with self.assertRaises(Exception):
+                    await verify_api_key(mock_creds)
+                self.assertTrue(mock_compare_digest.called, "secrets.compare_digest not called for mismatch")
 
     def test_verify_api_key_sync_wrapper(self):
         """Wrapper to run async test."""
