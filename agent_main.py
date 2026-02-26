@@ -10,8 +10,10 @@ import os
 import json
 import secrets
 import torch
+import logging
 import uvicorn
 import asyncio
+import secrets
 import gradio as gr
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Request, Depends, Security, status
@@ -222,7 +224,8 @@ You are an expert A&E Triage Nurse using the Manchester Triage System. Assess th
             return result
             
         except Exception as e:
-            return {"error": str(e), "triage_category": "Error"}
+            logger.exception("Error processing task")
+            return {"error": "Internal Processing Error", "triage_category": "Error"}
     
     def lookup_patient(self, nhs_number: str) -> PatientDemographics:
         """
@@ -260,6 +263,13 @@ You are an expert A&E Triage Nurse using the Manchester Triage System. Assess th
 # ==========================================
 # Application Setup
 # ==========================================
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 agent = NurseSimTriageAgent()
 
@@ -315,6 +325,27 @@ async def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(se
         headers={"WWW-Authenticate": "Bearer"},
     )
 
+def get_gradio_auth():
+    """
+    Get authentication credentials for Gradio UI.
+    Mirroring the API security: supports both API_KEY and HF_TOKEN.
+    """
+    auth_creds = []
+    api_key = os.environ.get("API_KEY")
+    hf_token = os.environ.get("HF_TOKEN")
+
+    if api_key:
+        auth_creds.append(("admin", api_key))
+    if hf_token:
+        auth_creds.append(("admin", hf_token))
+
+    if not auth_creds:
+        random_key = secrets.token_urlsafe(16)
+        print(f"WARNING: No authentication keys set. Gradio UI locked with random key: {random_key}")
+        auth_creds.append(("admin", random_key))
+
+    return auth_creds
+
 # ==========================================
 # API Endpoints
 # ==========================================
@@ -356,11 +387,13 @@ async def api_lookup_patient(request: PatientLookupRequest):
             "gp_practice": patient.gp_practice_name
         }
     except RestrictedPatientError as e:
+        logger.warning(f"Access denied for restricted patient: {request.nhs_number}")
         raise HTTPException(status_code=403, detail="🚫 ACCESS DENIED: Restricted Patient Record")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Unexpected error during patient lookup")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 # ==========================================
 # Gradio UI Integration
@@ -448,7 +481,8 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", neutral_hue="slate")) as
     )
 
 # Mount Gradio app to FastAPI at root
-app = gr.mount_gradio_app(app, demo, path="/")
+# Secure the UI with the same credentials as the API
+app = gr.mount_gradio_app(app, demo, path="/", auth=get_gradio_auth())
 
 if __name__ == "__main__":
     print("Starting Hybrid Server on port 7860...")
