@@ -28,7 +28,7 @@ class PDSEnvironment(Enum):
 
 
 class RestrictedPatientError(ValueError):
-    """Raised when accessing a restricted patient record."""
+    """Raised when attempting to access a restricted patient record."""
     pass
 
 
@@ -244,6 +244,9 @@ class PDSClient:
         if "security" in meta:
             security_codes = [s.get("code") for s in meta["security"]]
             is_restricted = "R" in security_codes
+
+        if is_restricted:
+            raise RestrictedPatientError(f"Access to patient record {nhs_number} is RESTRICTED (Code 'R'). Access Denied.")
         
         if is_restricted:
             raise RestrictedPatientError(f"Access to patient record {nhs_number} is RESTRICTED.")

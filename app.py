@@ -2,12 +2,34 @@ import gradio as gr
 import spaces
 import torch
 import os
+import secrets
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 from nursesim_rl.pds_client import lookup_patient_sync, RestrictedPatientError
 
 # Get HF token from environment (set as a Space secret)
 HF_TOKEN = os.environ.get("HF_TOKEN")
+
+def get_gradio_auth():
+    """
+    Get authentication credentials for Gradio UI.
+    Mirroring the API security: supports both API_KEY and HF_TOKEN.
+    """
+    auth_creds = []
+    api_key = os.environ.get("API_KEY")
+    hf_token = os.environ.get("HF_TOKEN")
+
+    if api_key:
+        auth_creds.append(("admin", api_key))
+    if hf_token:
+        auth_creds.append(("admin", hf_token))
+
+    if not auth_creds:
+        random_key = secrets.token_urlsafe(16)
+        print(f"WARNING: No authentication keys set. Gradio UI locked with random key: {random_key}")
+        auth_creds.append(("admin", random_key))
+
+    return auth_creds
 
 # Global model/tokenizer
 model = None
@@ -46,7 +68,7 @@ def lookup_patient_ui(nhs_no):
         status_msg = f"✅ Verified: {patient.full_name}"
         return patient.age, patient.gender, pmh_context, status_msg
     except RestrictedPatientError:
-        return 45, "Male", "", "❌ ACCESS DENIED: Restricted Record"
+        return 45, "Male", "", "🚫 ACCESS DENIED: Restricted Record"
     except Exception as e:
         return 45, "Male", "", f"❌ Lookup failed: {str(e)}"
 
@@ -187,4 +209,4 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", neutral_hue="slate")) as
     )
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(auth=get_gradio_auth())
