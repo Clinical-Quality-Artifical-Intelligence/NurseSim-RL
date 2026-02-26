@@ -8,12 +8,15 @@ into a single FastAPI application listening on port 7860.
 
 import os
 import json
+import secrets
 import torch
+import logging
 import uvicorn
 import asyncio
+import secrets
 import gradio as gr
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, HTTPException, Request, Depends, status, Security
+from fastapi import FastAPI, HTTPException, Request, Depends, Security, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -221,7 +224,8 @@ You are an expert A&E Triage Nurse using the Manchester Triage System. Assess th
             return result
             
         except Exception as e:
-            return {"error": str(e), "triage_category": "Error"}
+            logger.exception("Error processing task")
+            return {"error": "Internal Processing Error", "triage_category": "Error"}
     
     def lookup_patient(self, nhs_number: str) -> PatientDemographics:
         """
@@ -260,6 +264,13 @@ You are an expert A&E Triage Nurse using the Manchester Triage System. Assess th
 # Application Setup
 # ==========================================
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger(__name__)
+
 agent = NurseSimTriageAgent()
 
 @asynccontextmanager
@@ -280,37 +291,60 @@ app.add_middleware(
 )
 
 # ==========================================
-# Security Dependency
+# Security
 # ==========================================
 
-security_scheme = HTTPBearer()
+security = HTTPBearer()
 
-def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(security_scheme)):
+async def verify_api_key(credentials: HTTPAuthorizationCredentials = Security(security)):
     """
-    Verify the Bearer token against API_KEY or HF_TOKEN.
+    Verify API key or HF token from Authorization header.
+    Fail-closed: If no keys are configured, all access is denied.
     """
-    token = credentials.credentials
     api_key = os.environ.get("API_KEY")
     hf_token = os.environ.get("HF_TOKEN")
 
-    valid_keys = [k for k in [api_key, hf_token] if k]
-
-    if not valid_keys:
-        # Fail closed if no keys are configured
-        print("WARNING: No API_KEY or HF_TOKEN set. Denying all requests.")
+    if not api_key and not hf_token:
+        # System locked down if no keys configured
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Server configuration error: Authentication required but no keys set.",
-            headers={"WWW-Authenticate": "Bearer"},
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="System misconfigured: No authentication keys set."
         )
 
-    if token not in valid_keys:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid authentication credentials",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    return token
+    token = credentials.credentials
+
+    # Check against available keys
+    if api_key and secrets.compare_digest(token, api_key):
+        return token
+    if hf_token and secrets.compare_digest(token, hf_token):
+        return token
+
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid authentication credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+def get_gradio_auth():
+    """
+    Get authentication credentials for Gradio UI.
+    Mirroring the API security: supports both API_KEY and HF_TOKEN.
+    """
+    auth_creds = []
+    api_key = os.environ.get("API_KEY")
+    hf_token = os.environ.get("HF_TOKEN")
+
+    if api_key:
+        auth_creds.append(("admin", api_key))
+    if hf_token:
+        auth_creds.append(("admin", hf_token))
+
+    if not auth_creds:
+        random_key = secrets.token_urlsafe(16)
+        print(f"WARNING: No authentication keys set. Gradio UI locked with random key: {random_key}")
+        auth_creds.append(("admin", random_key))
+
+    return auth_creds
 
 # ==========================================
 # API Endpoints
@@ -328,7 +362,7 @@ async def get_agent_card():
             return json.load(f)
     raise HTTPException(status_code=404, detail="Agent card not found")
 
-@app.post("/process-task")
+@app.post("/process-task", dependencies=[Depends(verify_api_key)])
 async def process_task(task: TaskInput):
     result = agent.process_task(task.dict())
     if "error" in result and result.get("message") == "ModelStillLoading":
@@ -353,11 +387,13 @@ async def api_lookup_patient(request: PatientLookupRequest):
             "gp_practice": patient.gp_practice_name
         }
     except RestrictedPatientError as e:
+        logger.warning(f"Access denied for restricted patient: {request.nhs_number}")
         raise HTTPException(status_code=403, detail="🚫 ACCESS DENIED: Restricted Patient Record")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.exception("Unexpected error during patient lookup")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 # ==========================================
 # Gradio UI Integration
@@ -445,7 +481,8 @@ with gr.Blocks(theme=gr.themes.Soft(primary_hue="blue", neutral_hue="slate")) as
     )
 
 # Mount Gradio app to FastAPI at root
-app = gr.mount_gradio_app(app, demo, path="/")
+# Secure the UI with the same credentials as the API
+app = gr.mount_gradio_app(app, demo, path="/", auth=get_gradio_auth())
 
 if __name__ == "__main__":
     print("Starting Hybrid Server on port 7860...")
